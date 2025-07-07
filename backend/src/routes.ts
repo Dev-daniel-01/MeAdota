@@ -27,6 +27,7 @@ routes.delete("/pets/:id", ((req : Request, res: Response) : any => petControlle
 routes.post("/feedbacks", (req : Request, res: Response) : any =>feedbackController.create(req, res));
 routes.get("/feedbacks", (req : Request, res: Response) : any => feedbackController.read(req, res));
 routes.get("/feedbacks/pet/:petId", (req : Request, res: Response) : any =>feedbackController.readByPet(req, res));
+routes.delete("/feedbacks/:id", (req: Request, res: Response) : any => feedbackController.delete(req, res));
 
 
 

@@ -44,4 +44,19 @@ export default {
     });
     return res.status(200).json(feedbacks);
   },
+
+    // Deletar um feedback por ID
+  delete: async (req: Request, res: Response) => {
+    const id = Number(req.params.id);
+
+    try {
+      const deletedFeedback = await prisma.feedback.delete({
+        where: { id },
+      });
+      return res.status(200).json({ message: "Feedback deletado com sucesso", deletedFeedback });
+    } catch (error) {
+      return res.status(500).json({ error: "Erro ao deletar feedback." });
+    }
+  },
+
 };
