@@ -11,11 +11,29 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Feedback {
+  id        Int      @id @default(autoincrement())
+  comment   String
+  rating    Int      
+  image String
+  createdAt DateTime @default(now())
+
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+
+  petId     Int
+  pet       Pet      @relation(fields: [petId], references: [id])
+}
+
 model User {
   id        Int    @id @default(autoincrement())
-  name      String @unique
-  email     String 
+  name      String 
+  email     String @unique
   password  String
+  telephone String
+  cep String
+  pets      Pet[] 
+  feedbacks Feedback[]
 }
 
 model Pet {
@@ -27,6 +45,10 @@ model Pet {
   description String
   age Float
   size String
-  cep String
+  available Boolean @default(true)
+  createdAt   DateTime @default(now())
+  userId  Int
+  user   User @relation(fields: [userId], references: [id])
+  feedbacks Feedback[]
 }
 

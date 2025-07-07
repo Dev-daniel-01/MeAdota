@@ -1,6 +1,7 @@
 import { Router, Request, Response } from "express";
 import userController from "./controllers/user";
 import petController from "./controllers/pet";
+import feedbackController from "./controllers/feedbackController"
 
 
 
@@ -22,6 +23,10 @@ routes.post("/pets",  (req : Request, res: Response) : any => petController.crea
 routes.get("/pets", (req : Request, res: Response) : any => petController.read(req, res))
 routes.put("/pets/:id", (req : Request, res: Response) : any => petController.update(req, res))
 routes.delete("/pets/:id", ((req : Request, res: Response) : any => petController.delete(req, res)))
+
+routes.post("/feedbacks", (req : Request, res: Response) : any =>feedbackController.create(req, res));
+routes.get("/feedbacks", (req : Request, res: Response) : any => feedbackController.read(req, res));
+routes.get("/feedbacks/pet/:petId", (req : Request, res: Response) : any =>feedbackController.readByPet(req, res));
 
 
 
