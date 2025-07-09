@@ -22,7 +22,7 @@ model Feedback {
   user      User     @relation(fields: [userId], references: [id])
 
   petId     Int
-  pet       Pet      @relation(fields: [petId], references: [id])
+  pet       Pet      @relation(fields: [petId], references: [id], onDelete: Cascade)
 }
 
 model User {
