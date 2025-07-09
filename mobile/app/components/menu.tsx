@@ -6,7 +6,7 @@ export const Menu = () => {
   const [open, setOpen] = useState(false);
 
   const gotoApp = () => router.push('/');
-  const gotoExplore = () => router.push('./(tabs)/explore');
+  const gotoExplore = () => router.push('/explore');
 
   return (
     <>
@@ -78,7 +78,6 @@ export const Menu = () => {
 };
 
 const styles = StyleSheet.create({
-  // Novo estilo para o overlay
   overlay: {
     position: 'absolute',
     top: 0,
@@ -89,9 +88,8 @@ const styles = StyleSheet.create({
     zIndex: 9,
   },
 
-  // Mantenha todos os seus estilos existentes...
   topBar: {
-    backgroundColor: 'transparent',
+    backgroundColor: '#6C087C',
     width: '100%',
     height: '8%',
     paddingHorizontal: 16,
@@ -114,11 +112,10 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     borderBottomRightRadius: 20,
     top: 0,
-    zIndex: 11, // Aumentei para ficar acima do overlay
+    zIndex: 11, 
     position: 'fixed'
   },
 
-  // ... mantenha todos os outros estilos existentes
   icon: {
     width: 30,
     height: 30,
