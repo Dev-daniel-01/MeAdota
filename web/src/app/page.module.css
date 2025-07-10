@@ -1,0 +1,32 @@
+.pataNav{
+    width: 30px;
+    height: 30px;
+    transform: rotate(90deg) ;
+}
+
+.s1{
+    width: 100vw;
+    min-height: 100vh;
+    height: auto;
+    background-image: url(../assets/images/fundo-next.png);
+     background-size: cover;
+    background-position: center;
+}
+
+.s2{
+    width: 100vw;
+    min-height: 100vh;
+    height: auto;
+    background-image: url(../assets/images/fundo-next.png);
+     background-size: cover;
+  background-position: center;
+}
+
+.s3{
+    width: 100vw;
+    min-height: 100vh;
+    height: auto;
+    background-image: url(../assets/images/fundo-next.png);
+     background-size: cover;
+  background-position: center;
+}

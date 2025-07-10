@@ -1,0 +1,26 @@
+.slider {
+  position: relative;
+  width: 100vw;
+  height: 99.9vh; /* Aumentei para combinar com o height do slide */
+  margin: 2rem auto;
+  overflow: hidden;
+  margin-top: 0px;  
+}
+
+.slide {
+  display: none;
+  position: relative;
+  width: 100%;
+  height: 100%; 
+}
+
+.active {
+  display: block;
+}
+
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

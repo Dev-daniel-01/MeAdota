@@ -1,0 +1,32 @@
+.cardsContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  width: 100vw;
+  min-height: 90vh;
+  height: auto;
+  padding-top: 5%;
+  gap: 9%;
+  flex-wrap: wrap;
+
+}
+
+.cardsWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 15%;
+  margin-bottom: 10%;
+  justify-content: center;
+  align-items: center;
+}
+
+.cardsIcons {
+   
+  width: 95px;
+  height: 95px;
+}
+
+.cardsText {
+  width: 15rem;
+  height: auto;
+}
