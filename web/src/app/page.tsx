@@ -25,6 +25,7 @@ export default function Home() {
             />
           }
         />
+        {/* aa */}
         <Slider></Slider>
   
           {/* aa */}
