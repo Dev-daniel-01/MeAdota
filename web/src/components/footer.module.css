@@ -1,44 +1,41 @@
-.navBar {
+.Footer {
   width: 100vw;
-  height: 70px;
+  height: 65px;
   background-color: #6C087C;
-  position: fixed;
-  top: 0;
+  bottom: 0;
   left: 0;
   z-index: 999;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 1.5rem;
+  color: aliceblue;
 }
 
-.navSide {
-  width: 70px;
+.footerSide {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 0.8rem; /* ajusta o espaço entre os ícones */
 }
 
-.navLink {
+.footerLinkContainer {
   display: flex;
+  gap: 1rem;
   align-items: center;
-  justify-content: center;
-  opacity: 0.8;
 }
 
-.navLink:hover {
-  opacity: 1;
-}
-
-
-.navCenter {
+.footerCenter {
+    padding-top: 1rem;
   position: absolute;
+  text-align: center;
   left: 50%;
   transform: translateX(-50%);
   color: white;
-  padding-top: 1%;
+  font-size: 1.1rem;
 }
 
-.navCenter p{
-    font-size: 1.1rem;
+.iconsFooter {
+  width: 30px;
+  height: auto;
 }

@@ -39,7 +39,7 @@ export const Slider = () => {
               src={src}
               alt={`Slide ${index + 1}`}
               fill
-              style={{ objectFit: 'cover' }} 
+              className={styles.imgSlider}
               priority
             />
           )}

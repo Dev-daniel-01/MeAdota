@@ -1,32 +1,27 @@
-import style from "./menu.module.css"
+import styles from "./menu.module.css"
 import Image from "next/image";
 import logoNav from "../assets/images/logo.png";
+import pataNav from "../assets/images/Pata.png";
 
-type MenuProps = {
-    option01: string;
-    option02: string;
-}
-
-export const Menu = (props: MenuProps) => {
+export const Menu = () => {
     return (
-        <nav className={style.navBar}>
-            <ul className={style.navMenu}>
-                <li className={style.navLi} >
-                    <a href="/"  className={style.navLink}>
-                        <Image src={logoNav} alt="Logo" className={style.logoNav} width={65} height={60} priority />
-                    </a>
-                </li>
-                <li className={style.navLi}>
-                    <p>
-                         {props.option01} 
-                    </p>
-                </li>
-                <li className={style.navLi}>
-                    <a className={style.navLink} href="/pets">
-                        {props.option02}
-                    </a>
-                </li>
-            </ul>
+        <nav className={styles.navBar}>
+            <div className={styles.navSide}>
+                <a href="/" className={styles.navLink}>
+                    <Image src={logoNav} alt="Logo" width={65} height={60} priority />
+                </a>
+            </div>
+
+            <div className={styles.navCenter}>
+                <p>Showroom</p>
+            </div>
+
+            <div className={styles.navSide}>
+                <a href="/pets" className={styles.navLink}>
+                    <Image src={pataNav} alt="Pata" width={30} height={30} priority className={styles.navPata} />
+                </a>
+            </div>
         </nav>
+
     );
 };

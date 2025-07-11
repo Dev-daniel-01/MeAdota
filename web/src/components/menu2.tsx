@@ -1,32 +1,27 @@
-import style from "./menu.module.css"
+import style from "./menu2.module.css"
 import Image from "next/image";
 import logoNav from "../assets/images/logo.png";
+import voltarNav from "../assets/images/Voltar.png";
 
-type MenuProps = {
-    option01: string;
-    option02: string;
-}
 
-export const Menu2 = (props: MenuProps) => {
+export const Menu2 = () => {
     return (
         <nav className={style.navBar}>
-            <ul className={style.navMenu}>
-                <li className={style.navLi} >
+                <div className={style.navSide} >
                     <a href="/"  className={style.navLink}>
                         <Image src={logoNav} alt="Logo" className={style.logoNav} width={65} height={60} priority />
                     </a>
-                </li>
-                <li className={style.navLi}>
+                </div>
+                <div className={style.navCenter}>
                     <p>
-                         {props.option01} 
+                         Animais disponiveis
                     </p>
-                </li>
-                <li className={style.navLi}>
+                </div>
+                <div className={style.navSide}>
                     <a className={style.navLink} href="/">
-                        {props.option02}
+                        <Image src={voltarNav} alt='voltar' className={style.voltarNav} width={40} height={40} priority/>
                     </a>
-                </li>
-            </ul>
+                </div>
         </nav>
     );
 };

@@ -1,32 +1,60 @@
-.pataNav{
-    width: 30px;
-    height: 30px;
-    transform: rotate(90deg) ;
+
+
+.container{
+     background-image: url(../assets/images/fundo-next.png);
+     background-size: cover;
+  background-position: center;
 }
 
 .s1{
     width: 100vw;
     min-height: 100vh;
     height: auto;
-    background-image: url(../assets/images/fundo-next.png);
-     background-size: cover;
-    background-position: center;
 }
 
 .s2{
     width: 100vw;
     min-height: 100vh;
     height: auto;
-    background-image: url(../assets/images/fundo-next.png);
-     background-size: cover;
-  background-position: center;
 }
 
 .s3{
     width: 100vw;
-    min-height: 100vh;
+    min-height: 75vh;
     height: auto;
-    background-image: url(../assets/images/fundo-next.png);
-     background-size: cover;
-  background-position: center;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
 }
+.wrapAdocao{
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    gap: 5%;
+}
+
+.containerAdocao{
+    color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.adocaoButton{
+    width: 216px;
+    height: 50px;
+    background-color: #c48cdd;
+    color: aliceblue;
+    border-radius: 15px;
+    transition: all 200ms ease-in-out;
+    border: none;
+    font-size: 18px;
+}
+.adocaoButton:hover{
+    width: 216px;
+    height: 50px;
+    background-color: #EE88BB;
+    color: aliceblue;
+    border-radius: 15px;
+}
+
