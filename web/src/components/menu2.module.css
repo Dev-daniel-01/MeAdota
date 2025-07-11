@@ -42,3 +42,16 @@
 .navCenter p{
     font-size: 1.1rem;
 }
+
+@media (max-width: 520px) {
+.navBar {
+  padding: 0 0.5rem;
+}
+}
+
+@media (max-width: 400px) {
+.navBar {
+  padding: 0 0.2rem;
+}
+}
+

@@ -33,19 +33,18 @@
 
 @media (max-width: 850px) {
 .slider {
-  height: 60vh; /* Aumentei para combinar com o height do slide */
+  height: 60vh; 
 }
 }
 
 @media (max-width: 600px) {
 .slider {
-  height: 40vh; /* Aumentei para combinar com o height do slide */
+  height: 40vh; 
 }
 }
 
 @media (max-width: 460px) {
 .slider {
-  height: 38vh; /* Aumentei para combinar com o height do slide */
-
+  height: 34vh; 
 }
 }
