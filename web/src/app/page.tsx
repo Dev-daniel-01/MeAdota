@@ -27,6 +27,7 @@ export default function Home() {
         />
         <Slider></Slider>
   
+          {/* aa */}
       </section>
       <section className={styles.s2}>
                 <CardsSection></CardsSection>
