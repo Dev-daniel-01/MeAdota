@@ -5,11 +5,12 @@ const prisma = new PrismaClient()
 
 export default {
     create: async (req: Request, res: Response) => {
+        console.log("Create Pet body:", req.body);
         try {
             const pet = await prisma.pet.create({ data: req.body })
             return res.status(201).json(pet)
         } catch (error) {
-            return res.status(500).json({ error: "Erro ao criar pet." })
+            return res.status(500).json({ error: "Erro ao criar pet.", })
         }
     },
 
