@@ -1,0 +1,92 @@
+.navBar {
+  width: 100vw;
+  height: 70px;
+  background-color: #6c087c; /* roxo */
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1.5rem;
+}
+
+.navSide {
+  width: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.9;
+  transition: 0.2s ease;
+}
+
+.navLink:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.navCenter {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+}
+
+/* Caixa de busca */
+.searchBox {
+  display: flex;
+  align-items: center;
+  border: 3px solid #fff;
+  border-radius: 16px;
+  height: 3rem;  
+  width: 35vw;
+  color: white;
+}
+
+.searchIcon {
+  width: 1.7rem;
+  height: auto;
+  margin-right: 12px;
+  margin-left: 8px;
+}
+
+.searchInput {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 1rem;
+  width: 220px;
+}
+
+.searchInput::placeholder {
+  color: #ddd;
+}
+
+
+/* Responsivo */
+@media (max-width: 520px) {
+  .navBar {
+    padding: 0 0.5rem;
+  }
+  .searchInput {
+    width: 150px;
+  }
+}
+
+@media (max-width: 400px) {
+  .navBar {
+    padding: 0 0.2rem;
+  }
+  .searchInput {
+    width: 120px;
+  }
+}

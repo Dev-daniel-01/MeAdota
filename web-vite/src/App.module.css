@@ -1,0 +1,54 @@
+.container{
+    /* background-image: url(../assets/images/fundo-next.png);
+    background-size: cover;
+     background-position: center; */
+}
+
+.s1{
+    width: 100vw;
+    min-height: 100vh;
+    height: auto;
+    background-color: #2b0030;
+}
+
+.s2{
+    background-color: #7F668B;
+    width: 100vw;
+    min-height: 100vh;
+    height: auto;
+    background: linear-gradient(to bottom, #2b0030, #7f668b);
+}
+
+
+
+@media (max-width: 1200px) {
+
+.s1{
+    min-height: 60vh;
+}
+
+}
+
+@media (max-width: 950px) {
+
+.s1{
+    min-height: 40vh;
+}
+
+}
+
+@media (max-width: 600px) {
+
+.s1{
+    min-height: 20vh;
+}
+
+}
+
+@media (max-width: 460px) {
+
+.s1{
+    min-height: 10vh;
+}
+
+}
