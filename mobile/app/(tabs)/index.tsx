@@ -24,7 +24,9 @@ export default function HomeScreen() {
     <View style={styles.sobMenu}></View>
          <Menu />
 
-        <View style={styles.slider}><Slider images={images} /> </View>
+       <View style={{ marginTop: '8%' }}>
+  <Slider images={images} />
+</View>
     <View style={styles.cardsContainer}>
         <View style={styles.cardsWrap}>
           <Image style={styles.cardsIcons} source={require("../../assets/images/iconCards1.png")}></Image>
@@ -45,7 +47,7 @@ export default function HomeScreen() {
     </View>
     <View style={styles.adocaoContainer}>
         <Text style={styles.adocaoTitulo}>Pronto para Mudar uma Vida?</Text>
-        <Text style={styles.adocaoText}>"Explore nossa galeria de pets incríveis e encontre o companheiro perfeito para sua família."</Text>
+        <Text style={styles.adocaoText}>Explore nossa galeria de pets incríveis e encontre o companheiro perfeito para sua família.</Text>
           <View style={styles.adocaoWrapImgs}>
               <Image style={styles.adocaoImg} source={require("../../assets/images/adocaoCachorro.png")}></Image>
               <Image style={styles.adocaoImg} source={require("../../assets/images/adocaoGato.png")}></Image>

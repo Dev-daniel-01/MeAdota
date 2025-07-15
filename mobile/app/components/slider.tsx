@@ -1,10 +1,6 @@
-// components/Slider.tsx
 import React from 'react';
-import { View, Image, Dimensions, StyleSheet, ImageSourcePropType } from 'react-native';
+import { View, Image, useWindowDimensions, StyleSheet, ImageSourcePropType } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
-
-const { width } = Dimensions.get('window');
-const height = 506;
 
 interface SliderProps {
   images: {
@@ -14,38 +10,29 @@ interface SliderProps {
 }
 
 export const Slider: React.FC<SliderProps> = ({ images }) => {
+  const { width } = useWindowDimensions();
+  const height = width * 1.5; // Aumenta a altura do carrossel
+
   return (
-    <View style={styles.container}>
+    <View style={{ width }}>
       <Carousel
         loop
         width={width}
         height={height}
         autoPlay={true}
-        autoPlayInterval={3000}  
+        autoPlayInterval={3000}
         scrollAnimationDuration={100}
         data={images}
         renderItem={({ item }) => (
           <Image
             source={item.image}
-            style={styles.image}
-            resizeMode="contain"
+            style={{ width, height }}
+            resizeMode="contain" // evita corte
           />
         )}
       />
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-  alignItems: 'center',
-
-  },
-  image: {
-    width: '100%',
-    height: height,
-   
-  },
-});
 
 export default Slider;
