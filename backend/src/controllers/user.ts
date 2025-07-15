@@ -6,7 +6,7 @@ const prisma = new PrismaClient()
 
 export default {
     create: async (req: Request, res: Response) => {
-        const { name, email, password, telephone, cep} = req.body
+        const { name, email, password, telephone, cep } = req.body
 
         try {
             const hashedPassword = await bcrypt.hash(password, 10)
@@ -67,9 +67,21 @@ export default {
 
     delete: async (req: Request, res: Response) => {
         const id = +req.params.id
-        await prisma.user.delete({ where: { id } })
-        return res.status(200).json({ message: "Usuário deletado com sucesso." })
+        try {
+            // Apaga todos os feedbacks do usuário
+            await prisma.feedback.deleteMany({ where: { userId: id } })
+            // Apaga todos os pets do usuário
+            await prisma.pet.deleteMany({ where: { userId: id } })
+            // Agora apaga o usuário
+            await prisma.user.delete({ where: { id } })
+
+            return res.status(200).json({ message: "Usuário deletado com sucesso." })
+        } catch (error) {
+            console.error(error)
+            return res.status(500).json({ message: "Erro ao deletar usuário." })
+        }
     },
+
 
     login: async (req: Request, res: Response) => {
         const { email, password } = req.body

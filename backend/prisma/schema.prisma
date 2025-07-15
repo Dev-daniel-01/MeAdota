@@ -15,11 +15,11 @@ model Feedback {
   id        Int      @id @default(autoincrement())
   comment   String
   rating    Int      
-  image String
+  image     String
   createdAt DateTime @default(now())
 
   userId    Int
-  user      User     @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   petId     Int
   pet       Pet      @relation(fields: [petId], references: [id], onDelete: Cascade)
@@ -31,24 +31,23 @@ model User {
   email     String @unique
   password  String
   telephone String
-  cep String
+  cep       String
   pets      Pet[] 
   feedbacks Feedback[]
 }
 
 model Pet {
-  id Int @id @default(autoincrement())
-  image String
-  animal String
-  name String
-  race String
+  id          Int       @id @default(autoincrement())
+  image       String
+  animal      String
+  name        String
+  race        String
   description String
-  age Float
-  size String
-  available Boolean @default(true)
-  createdAt   DateTime @default(now())
-  userId  Int
-  user   User @relation(fields: [userId], references: [id])
-  feedbacks Feedback[]
+  age         Float
+  size        String
+  available   Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  userId      Int
+  user        User      @relation(fields: [userId], references: [id])
+  feedbacks   Feedback[]
 }
-
