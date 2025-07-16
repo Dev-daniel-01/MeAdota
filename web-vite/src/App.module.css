@@ -19,6 +19,37 @@
     background: linear-gradient(to bottom, #2b0030, #7f668b);
 }
 
+.s3{
+    background-color: #7F668B;
+    width: 100vw;
+    min-height: 50vh;
+    height: auto;
+    background-image: url('../src/assets/images/BackgroundS3.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    padding-bottom: 5rem;
+}
+
+.wrapS3{
+    display: flex;
+}
+
+.containerTextosFeedback{
+    width: 45%;
+    padding-left: 3%;
+}
+
+.TitleFeedback{
+    font-size: 4.5rem;
+}
+
+.paragrafoFeedback{
+    font-size: 2rem;
+    padding-top: 2rem;
+    width: 70%;
+    color: aliceblue    ;
+}
+
 
 
 @media (max-width: 1200px) {
