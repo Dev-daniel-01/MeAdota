@@ -1,17 +1,32 @@
-import { Link, Stack } from 'expo-router';
-import { StyleSheet, Text, View } from 'react-native';
-
-
+import { Stack, useRouter } from 'expo-router';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Menu } from '../app/components/menu';
 
 export default function NotFoundScreen() {
+  const router = useRouter();
+
   return (
     <>
-       <Stack.Screen options={{ title: 'Oops!' }} />
-        <View style={styles.container}>
-          <Text type="title">This screen does not exist.</Text>
-            <Link href="/" style={styles.link}>
-           <Text type="link">Go to home screen!</Text>
-        </Link>
+    <Stack.Screen options={{ headerShown: false }} />
+      <Menu/>
+      <View style={styles.container}>
+        <Image
+          source={require('../assets/images/404-icon.png')}
+          style={styles.image}
+          resizeMode="contain"
+        />
+        <Text style={styles.errorText}>ERROR</Text>
+        <Text style={styles.codeText}>404</Text>
+        <Text style={styles.subText}>Página não encontrada</Text>
+
+        <TouchableOpacity style={styles.button} onPress={() => router.push('/')}>
+          <Text style={styles.buttonText}>RETORNAR</Text>
+        </TouchableOpacity>
+        <Image
+          source={require('../assets/images/footer.png')}
+          style={styles.footer}
+          resizeMode="cover"
+        />
       </View>
     </>
   );
@@ -20,12 +35,48 @@ export default function NotFoundScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 20,
+    paddingHorizontal: 20,
   },
-  link: {
-    marginTop: 15,
-    paddingVertical: 15,
+  image: {
+    width: 120,
+    height: 120,
+    marginBottom: 20,
+  },
+  errorText: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#000',
+    marginBottom: -8,
+  },
+  codeText: {
+    fontSize: 36,
+    fontWeight: 'bold',
+    color: '#000',
+    marginBottom: 10,
+  },
+  subText: {
+    fontSize: 16,
+    color: '#000',
+    marginBottom: 30,
+  },
+  button: {
+    backgroundColor: '#660066', // roxo
+    paddingVertical: 12,
+    paddingHorizontal: 40,
+    borderRadius: 25,
+  },
+  buttonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  footer: {
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
+    height: 40,
   },
 });
