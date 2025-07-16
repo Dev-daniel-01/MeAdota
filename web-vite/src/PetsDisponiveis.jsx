@@ -1,8 +1,14 @@
 import { useEffect, useState } from "react";
 import { Menu2 } from "./components/menu2";
 import style from "./PetsDisponiveis.module.css";
+import { Footer } from "./components/footer";
+import { useNavigate } from "react-router";
+
 
 export default function PetsDisponiveis() {
+  const navigate = useNavigate();
+  const gotoAdocao = () => navigate('/adocao')
+
   const [allPets, setAllPets] = useState([]);
   const [filteredPets, setFilteredPets] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -12,24 +18,26 @@ export default function PetsDisponiveis() {
       try {
         const res = await fetch("http://localhost:5555/pets");
         const data = await res.json();
-
         const disponiveis = data.filter((pet) => pet.available);
 
+        // mostra primeiro sem endereço
+        setAllPets(disponiveis);
+        setFilteredPets(disponiveis);
+
+        // depois busca endereços sem travar a tela
         const petsComEndereco = await Promise.all(
           disponiveis.map(async (pet) => {
+            const cepLimpo = pet.user.cep.replace(/\D/g, "");
             try {
-              const cepLimpo = pet.user.cep.replace(/\D/g, "");
               const viaCepRes = await fetch(`https://viacep.com.br/ws/${cepLimpo}/json/`);
               const endereco = await viaCepRes.json();
-
-              const enderecoFormatado =
-                endereco.localidade && endereco.uf
+              return {
+                ...pet,
+                enderecoFormatado: endereco.localidade && endereco.uf
                   ? `${endereco.localidade}, ${endereco.uf}`
-                  : "Endereço não encontrado";
-
-              return { ...pet, enderecoFormatado };
-            } catch (err) {
-              console.error("Erro ao buscar CEP:", err);
+                  : "Endereço não encontrado"
+              };
+            } catch {
               return { ...pet, enderecoFormatado: "Endereço não encontrado" };
             }
           })
@@ -48,16 +56,17 @@ export default function PetsDisponiveis() {
   }, []);
 
 
+
   const handleSearch = (term) => {
     const lowerTerm = term.toLowerCase();
 
+    // Se não digitou nada, mostra todos
     if (!term.trim()) {
-      // Se não digitou nada, mostra todos
       setFilteredPets(allPets);
       return;
     }
 
-    // Filtra por nome do pet ou do dono
+    // Filtros praa busca 
     const filtrados = allPets.filter(
       (pet) =>
         pet.name.toLowerCase().includes(lowerTerm) ||           // nome do pet
@@ -103,7 +112,17 @@ export default function PetsDisponiveis() {
         {!loading && filteredPets.length === 0 && (
           <p>😢 Nenhum pet encontrado com essa busca</p>
         )}
+        {!loading && filteredPets.length > 0 && (
+          <div className={style.wrapButton}>
+            <button className={style.button} onClick={gotoAdocao}>
+              Quero Adotar
+            </button>
+          </div>
+        )}
+
       </section>
+
+      <Footer></Footer>
     </>
   );
 }
