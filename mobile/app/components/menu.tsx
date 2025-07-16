@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   topBar: {
     backgroundColor: '#6C087C',
     width: '100%',
-    height: '8%',
+    height: '4%',
     paddingHorizontal: 16,
     paddingVertical: 10,
     flexDirection: 'row',
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     top: 0,
     zIndex: 10,
-    position: 'fixed'
+    position: 'absolute'
   },
 
   sidebar: {
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 20,
     top: 0,
     zIndex: 11, 
-    position: 'fixed'
+    position: 'absolute'
   },
 
   icon: {
