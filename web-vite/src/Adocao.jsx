@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 import { Menu2 } from "./components/menu2";
 import { Footer } from './components/footer'
+import ModalZap from "./components/modalZap";
 
 import descriptionIcon from "../src/assets/images/description.png"
 import dogface from "../src/assets/images/dogFace.png"
@@ -17,6 +18,24 @@ export default function Adocao(){
   const [allPets, setAllPets] = useState([]);
   const [filteredPets, setFilteredPets] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+
+    const closeModal = () => {
+    setShowModal(false);
+  };
+
+    const gotoZap = () => {
+    const user = localStorage.getItem("user");
+
+    if (!user) {
+      alert("Você precisa estar logado para acessar o perfil!");
+      navigate("/login");
+      return; 
+    }
+
+    setShowModal(true);
+  };
+
 
     useEffect(() => {
     const fetchPets = async () => {
@@ -142,7 +161,7 @@ export default function Adocao(){
                     <span>{pet.enderecoFormatado}</span>
                   </div>
                   
-                  <button className={style.adoptButton}>
+                  <button className={style.adoptButton} onClick={gotoZap}>
                     Quero adotar
                   </button>
                 </div>
@@ -155,6 +174,7 @@ export default function Adocao(){
           <p>😢 Nenhum pet encontrado com essa busca</p>
         )}
       </section>
+      {showModal && <ModalZap onClose={closeModal} />}
       <Footer />
     </>
   )}

@@ -1,9 +1,9 @@
-import style from "./modalProfile.module.css";
+import style from "./modalZap.module.css";
 
 import manPet from "../assets/images/manPet.png"
 import man from "../assets/images/man.png"
 
-export default function ModalProfile({ onClose }) {
+export default function ModalZap({ onClose }) {
   return (
     <div className={style.modalOverlay}>
       <div className={style.modalContainer}>
