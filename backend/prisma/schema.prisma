@@ -24,17 +24,17 @@ model Feedback {
   petId     Int
   pet       Pet      @relation(fields: [petId], references: [id], onDelete: Cascade)
 }
-
-model User {
-  id        Int    @id @default(autoincrement())
-  name      String 
-  email     String @unique
-  password  String
-  telephone String
-  cep       String
-  pets      Pet[] 
-  feedbacks Feedback[]
-}
+  
+  model User {
+    id        Int    @id @default(autoincrement())
+    name      String 
+    email     String @unique
+    password  String
+    telephone String
+    cep       String
+    pets      Pet[] 
+    feedbacks Feedback[]
+  }
 
 model Pet {
   id          Int       @id @default(autoincrement())

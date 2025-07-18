@@ -30,7 +30,8 @@ export default {
                     select: {
                         id: true,
                         name: true,
-                        cep: true
+                        cep: true,
+                        telephone: true
                     }
                 }
             }
