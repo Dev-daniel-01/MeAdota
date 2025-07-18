@@ -39,12 +39,12 @@
 
 @media (max-width: 600px) {
 .slider {
-  height: 40vh; 
+  height: 60vh; 
 }
 }
 
 @media (max-width: 460px) {
 .slider {
-  height: 34vh; 
+  height: 45vh; 
 }
 }
