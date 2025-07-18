@@ -1,0 +1,148 @@
+.container {
+  display: flex;
+  height: 100vh;
+  background: #fff;
+}
+
+/* Lado esquerdo com a imagem */
+.imageSide {
+  flex: 1;
+  background: #f3f3f3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imageSide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Lado direito com fundo decorativo */
+.formSide {
+  flex: 1;
+  background: #fff url('../src/assets/images/fundoLogin2.png') no-repeat center;
+  background-size: contain;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+/* Box branco centralizado */
+.formBox {
+  width: 55%;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 12px 16px 30px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.wrapSideformBox{
+    display: flex;
+    align-items: center;
+    justify-content:space-between ;
+    margin-right: 35%;  
+    margin-bottom: 5%;
+}
+
+.title {
+  font-size: 3.5rem;
+  margin-bottom: 1.5rem;
+  color: #000000;
+}
+
+.logo {
+  width: 80px;
+  margin-bottom: 1rem;
+}
+
+.inputGroup {
+  position: relative;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.inputGroup input {
+  width: 100%;
+  padding: 0.8rem 0.8rem 0.8rem 3rem; 
+  height: 45px;
+  border: none;
+  border-radius: 8px;
+  background: #6C087C;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.inputGroup .inputIcon {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+}
+
+/* Placeholder branco */
+.inputGroup input::placeholder {
+  font-size: 1rem;
+  color: #fff;
+}
+
+.submitButton {
+  width: 100%;
+  height: 45px;
+  background: #6b1c84;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.submitButton:hover {
+  background: #541668;
+}
+
+/* Botão voltar só como link */
+.backButton {
+  margin-top: 1rem;
+  background: none;
+  border: none;
+  color: #000;
+  font-size: 1.5rem;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* Feedback */
+.feedback {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #d00; /* erro */
+}
+
+/* Ícone do olho para ver senha */
+.eyeIcon {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: 0.2s;
+}
+
+.eyeIcon:hover {
+  opacity: 1;
+}

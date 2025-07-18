@@ -7,7 +7,21 @@ import { useNavigate } from "react-router";
 
 export default function PetsDisponiveis() {
   const navigate = useNavigate();
-  const gotoAdocao = () => navigate('/adocao')
+  
+  const gotoAdocao = () => {
+  const user = localStorage.getItem("user");
+
+  if (!user) {
+    alert("Você precisa estar logado para adotar um pet!");
+    navigate("/login");
+    return;
+  }
+
+  navigate("/adocao");
+  };
+
+
+
 
   const [allPets, setAllPets] = useState([]);
   const [filteredPets, setFilteredPets] = useState([]);
