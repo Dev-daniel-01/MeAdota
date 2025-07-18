@@ -1,5 +1,6 @@
 import style from "./Adocao.module.css";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 
 import { Menu2 } from "./components/menu2";
 import { Footer } from './components/footer'
@@ -15,16 +16,20 @@ import ageIcon from "../src/assets/images/age.png"
 import porteIcon from "../src/assets/images/porte.png"
 
 export default function Adocao(){
+  const navigate = useNavigate();
+
   const [allPets, setAllPets] = useState([]);
   const [filteredPets, setFilteredPets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
+  const [selectedPet, setSelectedPet] = useState(null);
 
     const closeModal = () => {
     setShowModal(false);
+    setSelectedPet(null);
   };
 
-    const gotoZap = () => {
+  const gotoZap = (pet) => {
     const user = localStorage.getItem("user");
 
     if (!user) {
@@ -33,6 +38,7 @@ export default function Adocao(){
       return; 
     }
 
+    setSelectedPet(pet);
     setShowModal(true);
   };
 
@@ -42,6 +48,7 @@ export default function Adocao(){
       try {
         const res = await fetch("http://localhost:5555/pets");
         const data = await res.json();
+        console.log(data)
         const disponiveis = data.filter((pet) => pet.available);
 
         // mostra primeiro sem endereço
@@ -161,7 +168,7 @@ export default function Adocao(){
                     <span>{pet.enderecoFormatado}</span>
                   </div>
                   
-                  <button className={style.adoptButton} onClick={gotoZap}>
+                  <button className={style.adoptButton} onClick={()=>gotoZap(pet)}>
                     Quero adotar
                   </button>
                 </div>
@@ -174,7 +181,7 @@ export default function Adocao(){
           <p>😢 Nenhum pet encontrado com essa busca</p>
         )}
       </section>
-      {showModal && <ModalZap onClose={closeModal} />}
+      {showModal && <ModalZap onClose={closeModal} pet={selectedPet}/>}
       <Footer />
     </>
   )}
