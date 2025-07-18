@@ -9,6 +9,7 @@ import Adocao from "./Adocao.jsx";
 import Login from "./Login.jsx";
 import ProtectedRoute from "../src/components/ProtectedRoute.jsx";
 import Register from "./Register.jsx"
+import ModalProfile from "./components/modalProfile.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -19,6 +20,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/login" element={<Login />}/>
         <Route path="/adocao" element={ <ProtectedRoute><Adocao /></ProtectedRoute>}/>
         <Route path="/register" element={<Register />}/>
+        <Route path="/modalProfile" element={<ModalProfile/>}/>
         <Route path="*" element={<h1>Página não encontrada</h1>} />
       </Routes>
     </BrowserRouter>

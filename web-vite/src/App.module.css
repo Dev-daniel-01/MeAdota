@@ -50,6 +50,30 @@
     color: aliceblue;
 }
 
+.containerFeedbacks{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 5%;
+}
+
+.buttonFeedbacks{
+    width: 35%;
+    height: 4vh;
+    border-radius: 15px;
+    background-color: #C9A0DC;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 200ms ease-in-out;
+}
+
+.buttonFeedbacks:hover{
+    background-color: #ee88bba9;
+}
+
 
 
 @media (max-width: 1200px) {

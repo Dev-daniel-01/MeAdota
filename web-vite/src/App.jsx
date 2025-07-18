@@ -1,13 +1,17 @@
-import { useState } from 'react'
 import styles from './App.module.css'
+import { Navigate } from 'react-router'
+import { useState } from 'react'
+import { useNavigate } from "react-router";
+
+import { Footer } from './components/footer'
 import { Menu } from './components/menu'
 import { Slider } from './components/slider'
 import { CardsSection } from './components/cards'
 import FeedbackSlider from './components/cardsFeedback'
-import { Footer } from './components/footer'
+
 
 function App() {
-
+    const navigate = useNavigate();
   return (
     <>
       <Menu></Menu>
@@ -29,6 +33,7 @@ function App() {
             </div>
             <div className={styles.containerFeedbacks}>
               <FeedbackSlider></FeedbackSlider>
+              <button onClick={() => navigate("/petsdisponiveis")} className={styles.buttonFeedbacks}>Ver pets para adoção</button>
             </div>
 
           </div>

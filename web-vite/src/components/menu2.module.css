@@ -25,6 +25,7 @@
   justify-content: center;
   opacity: 0.9;
   transition: 0.2s ease;
+  cursor: pointer;
 }
 
 .navLink:hover {

@@ -95,16 +95,13 @@ export default function Login() {
               </span>
             </div>
 
-            {/* Botão Entrar */}
             <button type="submit" className={style.loginButton}>
               Entrar
             </button>
           </form>
 
-          {/* Mensagem de erro */}
           {message && <p className={style.error}>{message}</p>}
 
-          {/* Link para cadastro */}
           <p className={style.registerLink}>
             Não tem login? <a href="/register">Cadastre-se</a>
           </p>

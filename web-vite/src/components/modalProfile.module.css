@@ -1,0 +1,7 @@
+.container{
+    position: absolute; 
+    top: 50%;
+    left: 40%;
+    font: 900;
+    color: white;
+}
