@@ -17,19 +17,32 @@
   padding: 2rem;
   border-radius: 8px;
   width: 90%;
-  max-width: 500px;
+  max-width: 400px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  
+}
+
+.borders{
+  border-top: 1px solid black;
+  padding-top: 1rem;
+  border-bottom: 1px solid black;
+  padding-bottom: 1rem;
 }
 
 .closeButton {
   position: absolute;
-  top: 15px;
-  right: 15px;
+  top: 2px;
+  right: 8px;
   background: none;
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  color: #333;
+  color: black;
+  transition: all 200ms ease-in-out;
+}
+
+.closeButton:hover{
+  color: red;
 }
 
 .modalTitle {
@@ -53,10 +66,12 @@
 .formGroup input,
 .formGroup textarea {
   width: 100%;
-  padding: 0.8rem;
+  padding: 0.6rem;
   border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: 10px;
   font-size: 1rem;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+ 
 }
 
 .formGroup textarea {
@@ -66,11 +81,11 @@
 
 .sendButton {
   width: 100%;
-  padding: 1rem;
-  background-color: #25D366;
+  padding: 0.7rem;
+  background-color: #487C08;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;

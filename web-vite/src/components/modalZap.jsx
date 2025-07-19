@@ -46,14 +46,13 @@ export default function ModalZap({ onClose, pet }) {
   return (
     <div className={style.modalOverlay}>
       <div className={style.modalContainer}>
+        <div className={style.borders}>
         <button className={style.closeButton} onClick={onClose}>
           ✕
         </button>
-
         <h1 className={style.modalTitle}>Enviar mensagem para o tutor</h1>
 
         <div className={style.formGroup}>
-          <label>Seu Nome:</label>
           <input
             type="text"
             name="name"
@@ -65,7 +64,6 @@ export default function ModalZap({ onClose, pet }) {
         </div>
 
         <div className={style.formGroup}>
-          <label>Assunto:</label>
           <textarea
             name="subject"
             value={formData.subject}
@@ -85,7 +83,8 @@ export default function ModalZap({ onClose, pet }) {
             Mensagem será enviada para: {tutorPhone}
           </p>
         )}
-      </div>
+          </div>
+        </div>
     </div>
   );
 }

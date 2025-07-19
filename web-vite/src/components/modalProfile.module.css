@@ -17,7 +17,7 @@
   padding: 20px;
   border-radius: 8px;
   width: 80%;
-  max-width: 500px;
+  max-width: 400px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
@@ -62,19 +62,28 @@
 }
 
 .sectionButton{
-    width: 200px;
+    width: 160px;
     background-color: #08237C;
     color: white;
     border: none;
     font-weight: 700;
-     height: 50px;
-     border-radius: 8px;
+    height: 40px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.sectionImg1{
+  width: 120px;
+  height: auto;
+}
+
+.sectionImg2{
+  width: 120px;
+  height: auto;
 }
 
 .sectionTitle {
   color: #333;
   font-size: 1rem;
-  margin-bottom: 15px;
   text-align: center;
 }
 
