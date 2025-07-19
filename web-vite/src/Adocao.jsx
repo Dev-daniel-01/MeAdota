@@ -1,72 +1,59 @@
-import style from "./Adocao.module.css";
+import style from "./InfoPets.module.css";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
+import { api } from "../src/api/api";
+
 import { Menu2 } from "./components/menu2";
-import { Footer } from './components/footer'
-import ModalZap from "./components/modalZap";
+import { Footer } from "./components/footer";
 
-import descriptionIcon from "../src/assets/images/description.png"
-import dogface from "../src/assets/images/dogFace.png"
-import userBlack from "../src/assets/images/userBlack.png"
-import raceIcon from "../src/assets/images/race.png"
-import pataNegra from "../src/assets/images/pataNegra.png"
-import locationIcon from "../src/assets/images/location.png"
-import ageIcon from "../src/assets/images/age.png"
-import porteIcon from "../src/assets/images/porte.png"
+import descriptionIcon from "../src/assets/images/description.png";
+import dogface from "../src/assets/images/dogFace.png";
+import userBlack from "../src/assets/images/userBlack.png";
+import raceIcon from "../src/assets/images/race.png";
+import pataNegra from "../src/assets/images/pataNegra.png";
+import locationIcon from "../src/assets/images/location.png";
+import ageIcon from "../src/assets/images/age.png";
+import porteIcon from "../src/assets/images/porte.png";
 
-export default function Adocao(){
+export default function InfoPets() {
   const navigate = useNavigate();
 
-  const [allPets, setAllPets] = useState([]);
-  const [filteredPets, setFilteredPets] = useState([]);
+  const [myPets, setMyPets] = useState([]);          // todos os pets do usuário
+  const [filteredPets, setFilteredPets] = useState([]); // pets filtrados pela busca
   const [loading, setLoading] = useState(true);
-  const [showModal, setShowModal] = useState(false);
-  const [selectedPet, setSelectedPet] = useState(null);
 
-    const closeModal = () => {
-    setShowModal(false);
-    setSelectedPet(null);
-  };
+  const storedUser = JSON.parse(localStorage.getItem("user") || "{}");
 
-  const gotoZap = (pet) => {
-    const user = localStorage.getItem("user");
+  useEffect(() => {
+    const fetchMyPets = async () => {
+      if (!storedUser?.id) {
+        alert("Você precisa estar logado para acessar seus pets!");
+        navigate("/login");
+        return;
+      }
 
-    if (!user) {
-      alert("Você precisa estar logado para acessar o perfil!");
-      navigate("/login");
-      return; 
-    }
-
-    setSelectedPet(pet);
-    setShowModal(true);
-  };
-
-
-    useEffect(() => {
-    const fetchPets = async () => {
       try {
-        const res = await fetch("http://localhost:5555/pets");
-        const data = await res.json();
-        console.log(data)
-        const disponiveis = data.filter((pet) => pet.available);
+        const { data } = await api.get("/pets");
+        const meusPets = data.filter(
+          (pet) => Number(pet.userId) === Number(storedUser.id)
+        );
 
-        // mostra primeiro sem endereço
-        setAllPets(disponiveis);
-        setFilteredPets(disponiveis);
-
-        // depois busca endereços sem travar a tela
+        // Busca endereços com ViaCEP
         const petsComEndereco = await Promise.all(
-          disponiveis.map(async (pet) => {
+          meusPets.map(async (pet) => {
             const cepLimpo = pet.user.cep.replace(/\D/g, "");
             try {
-              const viaCepRes = await fetch(`https://viacep.com.br/ws/${cepLimpo}/json/`);
-              const endereco = await viaCepRes.json();
+              const viaCepRes = await api.get(
+                `https://viacep.com.br/ws/${cepLimpo}/json/`
+              );
+              const endereco = viaCepRes.data;
               return {
                 ...pet,
-                enderecoFormatado: endereco.localidade && endereco.uf
-                  ? `${endereco.localidade}, ${endereco.uf}`
-                  : "Endereço não encontrado"
+                enderecoFormatado:
+                  endereco.localidade && endereco.uf
+                    ? `${endereco.localidade}, ${endereco.uf}`
+                    : "Endereço não encontrado",
               };
             } catch {
               return { ...pet, enderecoFormatado: "Endereço não encontrado" };
@@ -74,103 +61,147 @@ export default function Adocao(){
           })
         );
 
-        setAllPets(petsComEndereco);
-        setFilteredPets(petsComEndereco);
+        setMyPets(petsComEndereco);       
+        setFilteredPets(petsComEndereco); 
       } catch (error) {
-        console.error("Erro ao buscar pets:", error);
+        console.error("Erro ao buscar seus pets:", error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchPets();
+    fetchMyPets();
   }, []);
 
+  // ✅ Excluir pet
+  const handleDeletePet = async (petId) => {
+    const confirmDelete = confirm("Tem certeza que deseja excluir este pet?");
+    if (!confirmDelete) return;
+
+    try {
+      await api.delete(`/pets/${petId}`);
+
+      // Remove da lista sem recarregar
+      setMyPets((prev) => prev.filter((p) => p.id !== petId));
+      setFilteredPets((prev) => prev.filter((p) => p.id !== petId));
+    } catch (error) {
+      console.error("Erro ao excluir pet:", error);
+      alert("Erro ao excluir o pet. Tente novamente.");
+    }
+  };
+
+  // ✅ Editar pet
+  const handleEditPet = (petId) => {
+    navigate(`/editar-pet/${petId}`);
+  };
+
+  // ✅ Função de busca
   const handleSearch = (term) => {
     const lowerTerm = term.toLowerCase();
 
-    // Se não digitou nada, mostra todos
     if (!term.trim()) {
-      setFilteredPets(allPets);
+      // Se não digitou nada, mostra todos
+      setFilteredPets(myPets);
       return;
     }
 
-    // Filtros praa busca 
-    const filtrados = allPets.filter(
+    const filtrados = myPets.filter(
       (pet) =>
-        pet.name.toLowerCase().includes(lowerTerm) ||           // nome do pet
-        pet.animal?.toLowerCase().includes(lowerTerm) ||        // tipo do animal
-        pet.race?.toLowerCase().includes(lowerTerm) ||          // raça
-        pet.user.name.toLowerCase().includes(lowerTerm) ||      // nome do dono
+        pet.name.toLowerCase().includes(lowerTerm) ||       // nome do pet
+        pet.animal?.toLowerCase().includes(lowerTerm) ||    // tipo
+        pet.race?.toLowerCase().includes(lowerTerm) ||      // raça
         pet.enderecoFormatado.toLowerCase().includes(lowerTerm) // cidade/UF
     );
 
     setFilteredPets(filtrados);
   };
 
-
-
-  return(
+  return (
     <>
+      {/* ✅ Passa a função handleSearch para o Menu2 */}
       <Menu2 onSearch={handleSearch} />
+
       <section className={style.container}>
-        {loading && <p>🔄 Carregando pets disponíveis...</p>}
+        {loading && <p>🔄 Carregando seus pets...</p>}
 
         {!loading && filteredPets.length > 0 && (
           <div className={style.cardsFlex}>
             {filteredPets.map((pet) => (
               <div key={pet.id} className={style.card}>
+                {/* Imagem e dono */}
                 <div className={style.cardImage}>
-                  <img
-                    src={pet.image}
-                    alt={pet.name}
-                    className={style.image}
-                  />
+                  <img src={pet.image} alt={pet.name} className={style.image} />
                   <p className={style.ownerName}>
                     <img src={userBlack} alt="Dono" className={style.icon} />
                     {pet.user.name}
                   </p>
                 </div>
-                
+
+                {/* Conteúdo */}
                 <div className={style.cardContent}>
                   <h1 className={style.petName}>
                     <img src={dogface} alt="Pet" className={style.iconName} />
                     {pet.name}
                   </h1>
+
+                  {/* Infos rápidas */}
                   <div className={style.containerInfos}>
                     <div className={style.infoRow}>
-                    <img src={pataNegra} alt="Raça" className={style.icon} />
-                    <span>{pet.animal}</span>
+                      <img src={pataNegra} alt="Tipo" className={style.icon} />
+                      <span>{pet.animal}</span>
+                    </div>
+
+                    <div className={style.infoRow}>
+                      <img src={raceIcon} alt="Raça" className={style.icon} />
+                      <span>{pet.race}</span>
+                    </div>
+
+                    <div className={style.infoRow}>
+                      <img src={ageIcon} alt="Idade" className={style.icon} />
+                      <span>{pet.age}</span>
+                    </div>
+
+                    <div className={style.infoRow}>
+                      <img src={porteIcon} alt="Porte" className={style.icon} />
+                      <span>{pet.size}</span>
+                    </div>
                   </div>
-                  <div className={style.infoRow}>
-                    <img src={raceIcon} alt="Raça" className={style.icon} />
-                    <span>{pet.race}</span>
-                  </div>
-                  
-                  <div className={style.infoRow}>
-                    <img src={ageIcon} alt="Idade" className={style.icon} />
-                    <span>{pet.age}</span>
-                  </div>
-                  
-                  <div className={style.infoRow}>
-                    <img src={porteIcon} alt="Porte" className={style.icon} />
-                    <span>{pet.size}</span>
-                  </div>
-                  </div>
-                  
+
+                  {/* Descrição */}
                   <div className={style.descriptionSection}>
-                    <img src={descriptionIcon} alt="Descrição" className={style.icon} />
+                    <img
+                      src={descriptionIcon}
+                      alt="Descrição"
+                      className={style.icon}
+                    />
                     <p>{pet.description}</p>
                   </div>
-                  
+
+                  {/* Localização */}
                   <div className={style.locationSection}>
-                    <img src={locationIcon} alt="Localização" className={style.icon} />
+                    <img
+                      src={locationIcon}
+                      alt="Localização"
+                      className={style.icon}
+                    />
                     <span>{pet.enderecoFormatado}</span>
                   </div>
-                  
-                  <button className={style.adoptButton} onClick={()=>gotoZap(pet)}>
-                    Quero adotar
-                  </button>
+
+                  {/* Botões */}
+                  <div className={style.buttonsRow}>
+                    <button
+                      className={style.editButton}
+                      onClick={() => handleEditPet(pet.id)}
+                    >
+                      Editar
+                    </button>
+                    <button
+                      className={style.deleteButton}
+                      onClick={() => handleDeletePet(pet.id)}
+                    >
+                      Excluir
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}
@@ -180,8 +211,11 @@ export default function Adocao(){
         {!loading && filteredPets.length === 0 && (
           <p>😢 Nenhum pet encontrado com essa busca</p>
         )}
+
+        <button className={style.buttonAddPet}>Adicionar Pet</button>
       </section>
-      {showModal && <ModalZap onClose={closeModal} pet={selectedPet}/>}
+
       <Footer />
     </>
-  )}
+  );
+}

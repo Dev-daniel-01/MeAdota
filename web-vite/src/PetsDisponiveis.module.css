@@ -11,7 +11,9 @@
     display: flex;
     flex-wrap: wrap;
     gap: 5%;
-    padding-top: 7rem;
+   
+    padding: 1rem;
+     padding-top: 5rem;
     justify-content: center;
     align-items: center;
     width: 100vw;
@@ -69,6 +71,7 @@
     color: #000000;
     font-size: 1.2rem;
     cursor: pointer;
+    margin-bottom: 1rem;
 }
 
 .button:hover{

@@ -11,6 +11,7 @@ import ProtectedRoute from "../src/components/ProtectedRoute.jsx";
 import Register from "./Register.jsx"
 import ModalProfile from "./components/modalProfile.jsx";
 import ModalZap from "./components/modalZap.jsx";
+import InfoPets from "./infoPets.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -23,6 +24,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/register" element={<Register />}/>
         <Route path="/modalProfile" element={<ModalProfile/>}/>
         <Route path="/modalZap" element={<ModalZap/>}/>
+        <Route path="/infoPets" element={<InfoPets/>}/>
         <Route path="*" element={<h1>Página não encontrada</h1>} />
       </Routes>
     </BrowserRouter>

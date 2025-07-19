@@ -9,6 +9,10 @@ import iconPassword from "../assets/images/logoSenha.png";
 import iconPhone from "../assets/images/telephone.png";
 import iconCep from "../assets/images/logoCep.png";
 
+// ✅ Importa os ícones para mostrar/ocultar senha
+import eyeOpen from "../assets/images/view.png";
+import eyeClosed from "../assets/images/hide.png";
+
 export default function ModalUpdateUser({ onClose }) {
   const [userData, setUserData] = useState({
     name: "",
@@ -18,12 +22,12 @@ export default function ModalUpdateUser({ onClose }) {
     cep: "",
   });
 
+  const [confirmPassword, setConfirmPassword] = useState(""); 
+  const [showPassword, setShowPassword] = useState(false); 
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
 
   const storedUser = JSON.parse(localStorage.getItem("user") || "{}");
-  console.log(storedUser)
-  console.log("ID do usuário:", storedUser?.id);
 
   useEffect(() => {
     async function fetchUser() {
@@ -56,10 +60,14 @@ export default function ModalUpdateUser({ onClose }) {
     e.preventDefault();
     setMessage("");
 
+    if (userData.password && userData.password !== confirmPassword) {
+      setMessage("❌ As senhas não coincidem!");
+      return;
+    }
+
     try {
       await api.put(`/users/${storedUser.id}`, userData);
 
-      // Atualiza localStorage
       localStorage.setItem(
         "user",
         JSON.stringify({ ...storedUser, ...userData })
@@ -79,6 +87,7 @@ export default function ModalUpdateUser({ onClose }) {
   return (
     <section className={style.modalOverlay}>
       <div className={style.modalContainer}>
+        <div className={style.modalContainerDivs}>
         <button className={style.closeButton} onClick={onClose}>
           ✕
         </button>
@@ -114,20 +123,49 @@ export default function ModalUpdateUser({ onClose }) {
                 onChange={handleChange}
                 required
               />
-              <img src={iconEmail} alt="Email" />
+              <img src={iconEmail} alt="Email" className={style.toBlack}/>
             </div>
 
             {/* Senha */}
-            <div className={style.inputGroup}>
+            <div className={style.inputGroup} style={{ position: "relative" }}>
               <input
-                type="password"
+                type={showPassword ? "text" : "password"} 
                 name="password"
-                placeholder="Senha:"
+                placeholder="Nova Senha (opcional):"
                 value={userData.password}
                 onChange={handleChange}
               />
               <img src={iconPassword} alt="Senha" />
+
+              {/* ✅ Botão com ícone para mostrar/ocultar */}
+              <img
+                src={showPassword ? eyeClosed : eyeOpen }
+                alt={showPassword ? "Ocultar senha" : "Mostrar senha"}
+                onClick={() => setShowPassword((prev) => !prev)}
+                className={style.toBlackEye}
+              />
             </div>
+
+            {/* Confirmar Senha */}
+            {userData.password && (
+              <div className={style.inputGroup} style={{ position: "relative" }}>
+                <input
+                  type={showPassword ? "text" : "password"} 
+                  placeholder="Confirmar Senha:"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                />
+                <img src={iconPassword} alt="Confirmar Senha" />
+
+                {/* ✅ Mesmo botão para confirmar senha */}
+                <img
+                  src={showPassword ? eyeClosed : eyeOpen}
+                  alt={showPassword ? "Ocultar senha" : "Mostrar senha"}
+                  onClick={() => setShowPassword((prev) => !prev)}
+                  className={style.toBlackEye}
+                />
+              </div>
+            )}
 
             {/* Telefone */}
             <div className={style.inputGroup}>
@@ -150,9 +188,10 @@ export default function ModalUpdateUser({ onClose }) {
                 placeholder="CEP:"
                 value={userData.cep}
                 onChange={handleChange}
+                
                 required
               />
-              <img src={iconCep} alt="CEP" />
+              <img src={iconCep} alt="CEP" className={style.toBlack}/>
             </div>
 
             {message && <p className={style.message}>{message}</p>}
@@ -162,6 +201,8 @@ export default function ModalUpdateUser({ onClose }) {
             </button>
           </form>
         )}
+        </div>
+
       </div>
     </section>
   );

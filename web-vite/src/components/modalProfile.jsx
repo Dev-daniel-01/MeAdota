@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Navigate, useNavigate } from "react-router";
 import style from "./modalProfile.module.css";
 
 import manPet from "../assets/images/manPet.png";
@@ -7,14 +8,12 @@ import man from "../assets/images/man.png";
 import ModalUpdateUser from "./modalUpdateUser"; // Importamos o modal do usuário
 
 export default function ModalProfile({ onClose }) {
+  const navigate = useNavigate()
   const [showUpdateUser, setShowUpdateUser] = useState(false);
 
   const handleOpenUpdateUser = () => {
-    // Fecha o conteúdo do ModalProfile e abre o UpdateUser
     setShowUpdateUser(true);
   };
-
-  // Se clicou em DO USUÁRIO, só renderiza o ModalUpdateUser
   if (showUpdateUser) {
     return <ModalUpdateUser onClose={onClose} />;
   }
@@ -23,13 +22,13 @@ export default function ModalProfile({ onClose }) {
     <div className={style.modalOverlay}>
       <div className={style.modalContainer}>
         <div className={style.modalContainerDivs}>
-          <h1>Alterar informações</h1>
+          <h1>Alterar  ou adicionar </h1>
 
           <div className={style.modalWrap}>
             {/* Seção PET */}
             <div className={style.section}>
               <img src={manPet} alt="manPet" className={style.sectionImg1} />
-              <button className={style.sectionButton}>DO PET</button>
+              <button className={style.sectionButton} onClick={() => navigate("/infoPets")}>PET</button>
             </div>
 
             {/* Seção USUÁRIO */}
@@ -39,7 +38,7 @@ export default function ModalProfile({ onClose }) {
                 className={style.sectionButton}
                 onClick={handleOpenUpdateUser}
               >
-                DO USUÁRIO
+               USUÁRIO
               </button>
             </div>
           </div>

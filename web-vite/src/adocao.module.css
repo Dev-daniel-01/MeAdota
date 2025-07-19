@@ -135,3 +135,45 @@
     border-bottom: 1px solid black;
     padding-bottom: 1rem;
 }
+
+@media (max-width: 900px) {
+  .card {
+    flex-direction: column;
+  }
+
+  .cardImage {
+    width: 100%;
+    min-width: auto;
+    border-radius: 16px 16px 0 0;
+  }
+
+  .image {
+    border-radius: 16px 16px 0 0;
+    height: auto;
+  }
+
+  .cardContent {
+    width: 100%;
+  }
+}
+
+
+@media (min-width: 768px) {
+  .card {
+    flex-direction: row;  /* lado a lado */
+  }
+  .cardImage {
+    width: 40%; /* por exemplo */
+  }
+  .cardContent {
+    width: 60%;
+  }
+}
+
+/* Para telas muito pequenas, garante que o conteúdo não ultrapasse */
+@media (max-width: 400px) {
+  .card {
+    min-width: auto; /* pode tirar o min-width para melhor fluidez */
+    padding: 0px;
+  }
+}
