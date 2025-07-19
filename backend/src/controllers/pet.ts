@@ -26,6 +26,7 @@ export default {
                 age: true,
                 size: true,
                 available: true,
+                userId: true, 
                 user: {
                     select: {
                         id: true,
