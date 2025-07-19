@@ -31,6 +31,32 @@ export default {
         }
     },
 
+    show: async (req: Request, res: Response) => {
+        const id = +req.params.id;
+
+        try {
+            const user = await prisma.user.findUnique({
+                where: { id },
+                select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    telephone: true,
+                    cep: true
+                }
+            });
+
+            if (!user) {
+                return res.status(404).json({ message: "Usuário não encontrado" });
+            }
+
+            return res.status(200).json(user);
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ message: "Erro ao buscar usuário" });
+        }
+    },
+
     read: async (req: Request, res: Response) => {
         const users = await prisma.user.findMany({
             select: {
