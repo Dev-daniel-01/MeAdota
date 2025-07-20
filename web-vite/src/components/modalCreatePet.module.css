@@ -1,0 +1,280 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.modal {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 16px;
+  width: 95%;
+  max-width: 850px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  position: relative;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.closeBtn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #666;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.closeBtn:hover {
+  color: #000;
+}
+
+.modalTitle {
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.form {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.imageUpload {
+  flex: 1;
+  min-width: 240px;
+  text-align: center;
+}
+
+.imageLabel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f7f7f7;
+  border: 2px dashed #bbb;
+  border-radius: 12px;
+  height: 200px;
+  cursor: pointer;
+  transition: 0.3s;
+  flex-direction: column;
+  gap: 10px;
+  color: #555;
+}
+
+.imageLabel:hover {
+  border-color: #4CAF50;
+}
+
+.imageLabel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.hiddenInput {
+  display: none;
+}
+
+.uploadBtn {
+  margin-top: 10px;
+  padding: 10px 15px;
+  background: #eee;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  transition: 0.3s;
+}
+
+.uploadBtn:hover {
+  background: #ddd;
+}
+
+.fields {
+  flex: 2;
+  min-width: 300px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.inputGroup {
+  flex: 1 1 30%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.inputGroupFull {
+  flex: 1 1 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.inputGroupFull textarea {
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  height: 40px;
+}
+
+.inputGroup label {
+  font-size: 0.9rem;
+  color: #555;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.inputGroup input,
+.inputGroup textarea {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.inputGroup input:focus,
+.inputGroup textarea:focus {
+  border-color: #4CAF50;
+}
+
+.inputGroup textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.submitBtn {
+  width: 100%;
+  padding: 14px;
+  background: #4CAF50;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 1rem;
+}
+
+.submitBtn:hover {
+  background: #43a047;
+}
+
+@media (max-width: 768px) {
+  .modal {
+    width: 95%;
+    max-height: 90vh; 
+    padding: 1.5rem 1rem;
+    border-radius: 12px;
+  }
+
+  .form {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .imageUpload {
+    min-width: auto;
+    width: 100%;
+  }
+
+  .imageLabel {
+    height: 180px;
+  }
+
+  .fields {
+    flex: 1 1 100%;
+    min-width: auto;
+    width: 100%;
+  }
+
+  .inputGroup {
+    flex: 1 1 100%;
+  }
+
+  .inputGroupFull {
+    flex: 1 1 100%;
+  }
+
+  .submitBtn {
+    font-size: 1.1rem;
+    padding: 16px;
+  }
+}
+
+@media (max-width: 400px) {
+  .modal {
+    padding: 1rem 0.8rem;
+  }
+
+  .imageLabel {
+    height: 140px;
+  }
+
+  .submitBtn {
+    padding: 12px;
+    font-size: 1rem;
+  }
+}
+
+/* NOVO: Ícones dentro dos inputs */
+.inputWithIcon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 0 10px;
+  transition: border-color 0.2s;
+}
+
+.inputWithIcon img {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  opacity: 0.8;
+  filter: brightness(0) saturate(100%);
+}
+
+.inputWithIcon:focus-within {
+  border-color: #4CAF50;
+}
+
+.inputWithIcon input,
+.inputWithIcon textarea {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  padding: 10px 0;
+  font-size: 0.95rem;
+  min-height: 40px;
+  resize: none;
+}
