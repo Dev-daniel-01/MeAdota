@@ -11,7 +11,7 @@ const images = [
   { id: 5, image: require('../../assets/images/slider5.png') },
 ];
 
- const gotoExplore = () => router.push('./(tabs)/explore');
+ const gotoExplore = () => router.push('/(tabs)/explore');
 
 export default function HomeScreen() {
   return (
