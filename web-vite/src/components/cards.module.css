@@ -2,9 +2,9 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 10%;
+  flex-direction: row;
+  gap: 5rem;
   padding: 130px;
-
 }
 
 .cardsWrap {
@@ -16,7 +16,7 @@
 
 .cardsIcons {
   background-color: #c9a0dc;
-  width: 100px;
+  width: 80px;
   height: auto;
   border-radius: 50%;
   display: flex;
@@ -25,23 +25,20 @@
 }
 
 
-.cardsIcons img {
-  width: 56px;
-  height: 56px;
-}
-
-
 .cardBox {
   background-color: #c9a0dc;
   border-radius: 12px;
   padding: 48px 36px;
-  width: 350px;
-  min-height: 500px;
+  width: 280px;
+  min-height: 380px;
+  max-height: 380px;
+  height: 380px;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  overflow-y: hidden;
 }
 
 .cardText {
@@ -54,26 +51,114 @@
   white-space: pre-line;
 }
 
+.cardsWrap2{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5rem;
+}
 
-@media (max-width: 530px) {
-  .cardBox {
-    width: 90%;
-    padding: 32px 24px;
-    min-height: 200px;  
-  }
-
+@media(max-width: 1620px){
   .cardsIcons {
-    width: 80px;
-    height: 80px;
+    width: 60px;
   }
+  
+  
+  .cardBox {
+    width: 250px;
+    min-height: 350px;
+  }
+  
+}
 
-  .cardsIcons img {
-    width: 40px;
-    height: 40px;
+@media(max-width: 1500px){
+  .cardsIcons {
+    width: 60px;
+  }
+  
+  
+  .cardBox {
+    width: 220px;
+    min-height: 290px;
   }
 
   .cardText {
-    font-size: 15px;
-    letter-spacing: 0.08em;
+    font-size: 18px;
   }
+  
+}
+
+@media(max-width: 1380px){
+  .cardsIcons {
+    width: 60px;
+  }
+  
+  
+  .cardBox {
+    width: 200px;
+    min-height: 250px;
+  }
+  
+}
+
+@media(max-width: 1300px){
+  .cardsIcons {
+    width: 90px;
+  }
+  
+  
+  .cardBox {
+    width: 300px;
+    min-height: 300px;
+  }
+  
+}
+
+
+@media(max-width: 940px){
+  .cardsIcons {
+    width: 80px;
+  }
+  
+  
+  .cardBox {
+    width: 200px;
+    min-height: 200px;
+    height: 200px;
+  }
+  .cardText {
+    font-size: 13px;
+  }
+
+  .cardsContainer {
+    gap: 2rem;
+    padding: 10px;
+  }
+  
+}
+
+
+
+
+
+@media (max-width: 530px) {
+
+  .cardsIcons {
+    width: 70px;
+  }
+  
+  
+  .cardBox {
+    width: 160px;
+    min-height: 160px;
+    height: 160px;
+  }
+  .cardText {
+    font-size: 12px;
+  }
+  .cardsWrap2{
+    gap: 2rem;
+  }
+
+
 }

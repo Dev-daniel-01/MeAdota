@@ -10,8 +10,7 @@
 .cardsFlex{
     display: flex;
     flex-wrap: wrap;
-    gap: 5%;
-   
+    gap: 3%;
     padding: 1rem;
      padding-top: 5rem;
     justify-content: center;
@@ -43,6 +42,7 @@
     padding-top: 5%;
     padding-left: 2%;
      line-height: 1.7rem;
+  
 }
 
 .ownerName {
@@ -72,6 +72,7 @@
     font-size: 1.2rem;
     cursor: pointer;
     margin-bottom: 1rem;
+    transition: all 200ms ease-in-out;
 }
 
 .button:hover{
@@ -115,7 +116,7 @@
 }
 
 .cardContent {
-     line-height: 0.3;
+     line-height: 1.3rem;
 }
 
 .location {

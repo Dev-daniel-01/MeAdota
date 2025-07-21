@@ -40,7 +40,6 @@
   align-items: center;
 }
 
-/* Caixa de busca */
 .searchBox {
   display: flex;
   align-items: center;
@@ -48,7 +47,7 @@
   border-radius: 16px;
   height: 3rem;  
   width: 35vw;
-  color: white;
+  color: white; 
 }
 
 .searchIcon {
@@ -71,6 +70,19 @@
   color: #ddd;
 }
 
+@media (max-width: 768px) {
+  .navBar {
+    padding: 0 0.5rem;
+  }
+  .searchBox{
+    width: 100% 
+  }
+  .searchInput::placeholder {
+    
+    font-size: 13px;
+  }
+  
+}
 
 /* Responsivo */
 @media (max-width: 520px) {
@@ -80,6 +92,14 @@
   .searchInput {
     width: 150px;
   }
+  .logoNav{
+    height: 50px;
+    width: auto;
+  }
+  .profileNav{
+    height: 30px;
+    width: auto;
+  }
 }
 
 @media (max-width: 400px) {
@@ -88,5 +108,8 @@
   }
   .searchInput {
     width: 120px;
+  }
+  .searchInput::placeholder {
+    font-size: 11px;
   }
 }

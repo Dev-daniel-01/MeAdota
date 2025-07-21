@@ -12,6 +12,7 @@ import icon4 from '../assets/images/iconCard4.png';
 export const CardsSection = () => {
   return (
     <div className={styles.cardsContainer}>
+      <div className={styles.cardsWrap2}>
       <div className={styles.cardsWrap}>
         <img className={styles.cardsIcons} src={icon1} alt="Ícone 1" />
           <div className={styles.cardBox}>
@@ -29,7 +30,9 @@ export const CardsSection = () => {
           </div>
         </div>
       </div>
-
+      </div>
+      
+      <div className={styles.cardsWrap2}>
       <div className={styles.cardsWrap}>
         <img className={styles.cardsIcons} src={icon3} alt="Ícone 3" />    
         <div className={styles.cardBox}>
@@ -48,6 +51,7 @@ export const CardsSection = () => {
           </div>
         </div>
         </div>
+      </div>
       </div>
   );
 };
