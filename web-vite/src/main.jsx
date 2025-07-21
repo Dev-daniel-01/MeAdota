@@ -12,6 +12,7 @@ import Register from "./Register.jsx"
 import ModalProfile from "./components/modalProfile.jsx";
 import ModalZap from "./components/modalZap.jsx";
 import InfoPets from "./infoPets.jsx";
+import ModalEditPet from "./components/modalEditPet.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -25,6 +26,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/modalProfile" element={<ModalProfile/>}/>
         <Route path="/modalZap" element={<ModalZap/>}/>
         <Route path="/infoPets" element={<InfoPets/>}/>
+        <Route path="/modalEditPet" element={<ModalEditPet/>}/>
         <Route path="*" element={<h1>Página não encontrada</h1>} />
       </Routes>
     </BrowserRouter>

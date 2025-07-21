@@ -2,11 +2,12 @@ import style from "./InfoPets.module.css";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
-import { api } from "../src/api/api"; 
+import { api } from "../src/api/api";
 
 import { Menu2 } from "./components/menu2";
 import { Footer } from "./components/footer";
 import ModalCreatePet from "./components/modalCreatePet";
+import ModalEditPet from "./components/modalEditPet";
 
 import descriptionIcon from "../src/assets/images/description.png";
 import dogface from "../src/assets/images/dogFace.png";
@@ -22,6 +23,7 @@ export default function InfoPets() {
   const [myPets, setMyPets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showModalAdd, setShowModalAdd] = useState(false);
+  const [selectedPet, setSelectedPet] = useState(null);
 
   const storedUser = JSON.parse(localStorage.getItem("user") || "{}");
 
@@ -44,12 +46,14 @@ export default function InfoPets() {
 
         const petsComEndereco = await Promise.all(
           meusPets.map(async (pet) => {
-            const cepLimpo = pet.user.cep.replace(/\D/g, "");
+            const cepLimpo = pet.user?.cep?.replace(/\D/g, "");
+            if (!cepLimpo) {
+              return { ...pet, enderecoFormatado: "Endereço não encontrado" };
+            }
             try {
-              const viaCepRes = await api.get(
-                `https://viacep.com.br/ws/${cepLimpo}/json/`
-              );
-              const endereco = viaCepRes.data;
+              const res = await fetch(`https://viacep.com.br/ws/${cepLimpo}/json/`);
+              if (!res.ok) throw new Error("Erro na consulta CEP");
+              const endereco = await res.json();
               return {
                 ...pet,
                 enderecoFormatado:
@@ -87,8 +91,25 @@ export default function InfoPets() {
     }
   };
 
-  const handleEditPet = (petId) => {
-    navigate(`/editar-pet/${petId}`);
+  const handleEditPet = (pet) => {
+    setSelectedPet(pet);
+  };
+
+  const handleUpdatePet = async (updatedData) => {
+    try {
+      const { data } = await api.put(`/pets/${selectedPet.id}`, updatedData);
+
+      // Atualiza a lista localmente
+      setMyPets((prev) =>
+        prev.map((p) => (p.id === selectedPet.id ? { ...p, ...data } : p))
+      );
+
+      alert("✅ Pet atualizado com sucesso!");
+      setSelectedPet(null); // fecha modal
+    } catch (error) {
+      console.error("❌ Erro ao atualizar pet:", error);
+      alert("Erro ao atualizar o pet!");
+    }
   };
 
   const handleAddPet = async (newPet) => {
@@ -101,8 +122,9 @@ export default function InfoPets() {
 
       const petData = {
         ...newPet,
-        userId: Number(storedUser.id), // garante que é número
-        available: true
+        age: parseFloat(newPet.age),       // Convertendo idade para número
+        userId: Number(storedUser.id),     // Garantindo userId como número
+        available: true,
       };
 
       console.log("📤 Enviando para API:", petData);
@@ -139,7 +161,7 @@ export default function InfoPets() {
                   <img src={pet.image} alt={pet.name} className={style.image} />
                   <p className={style.ownerName}>
                     <img src={userBlack} alt="Dono" className={style.icon} />
-                    {pet.user.name}
+                    {pet.user?.name || "Sem dono"}
                   </p>
                 </div>
 
@@ -189,7 +211,7 @@ export default function InfoPets() {
                   <div className={style.buttonsRow}>
                     <button
                       className={style.editButton}
-                      onClick={() => handleEditPet(pet.id)}
+                      onClick={() => handleEditPet(pet)}
                     >
                       Editar
                     </button>
@@ -215,6 +237,14 @@ export default function InfoPets() {
           <ModalCreatePet
             onClose={() => setShowModalAdd(false)}
             onAddPet={handleAddPet}
+          />
+        )}
+
+        {selectedPet && (
+          <ModalEditPet
+            petData={selectedPet}
+            onClose={() => setSelectedPet(null)}
+            onSave={handleUpdatePet}
           />
         )}
       </section>

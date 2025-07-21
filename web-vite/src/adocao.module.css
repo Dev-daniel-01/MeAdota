@@ -134,6 +134,7 @@
     gap: 1rem;
     border-bottom: 1px solid black;
     padding-bottom: 1rem;
+    flex-wrap: wrap;
 }
 
 @media (max-width: 900px) {

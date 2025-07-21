@@ -1,0 +1,241 @@
+:root {
+  --modal-bg: #fff;
+  --overlay-bg: rgba(0, 0, 0, 0.5);
+  --border-color: #ccc;
+  --text-muted: #666;
+  --btn-green: #4caf50;
+  --btn-gray: #aaa;
+}
+
+/* === Overlay e modal === */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--overlay-bg);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; 
+  z-index: 999;
+  padding: 2rem 1rem; 
+  overflow-y: auto; 
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background: var(--modal-bg);
+  border-radius: 10px;
+  padding: 1rem;
+  width: 100%;
+  max-width: 800px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.modal h2 {
+  text-align: center;
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.contentWrapper {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.imageSection {
+  flex: 1;
+  min-width: 220px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.petImage,
+.imagePlaceholder {
+  width: 100%;
+  max-width: 250px;
+  border-radius: 8px;
+  border: 2px solid var(--border-color);
+}
+
+.imagePlaceholder {
+  height: 180px;
+  background: #f1f1f1;
+  border: 2px dashed #bbb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin: 0 auto;
+}
+
+.uploadBtn {
+  width: 100%;
+  display: inline-block;
+  margin-top: 8px;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  background: #eee;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+
+.formSection {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* Campos */
+.inputGroup {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 140px; 
+}
+
+.inputGroup label {
+  font-size: 0.85rem;
+  margin-bottom: 4px;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 0.95rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  resize: none;
+}
+
+/* Campo com ícone */
+.inputWithIcon {
+  position: relative;
+}
+
+.inputWithIcon input,
+.inputWithIcon select {
+  padding-right: 36px; /* espaço para o ícone */
+}
+
+.inputWithIcon img {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+  filter: brightness(0) saturate(100%);
+}
+
+/* Toggle / checkbox */
+.toggleAvailable {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.checkboxLabel input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+/* Botões */
+.buttonsRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.saveBtn,
+.cancelBtn {
+  flex: 1;
+  padding: 12px;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.saveBtn {
+  background: var(--btn-green);
+}
+
+.cancelBtn {
+  background: var(--btn-gray);
+}
+
+.saveBtn:hover {
+  background: #43a047;
+}
+
+.cancelBtn:hover {
+  background: #888;
+}
+
+/* RESPONSIVO */
+@media (max-width: 992px) {
+  .contentWrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+
+
+@media (max-width: 400px) {
+  .modal {
+    border-radius: 8px;
+  }
+
+  .petImage,
+  .imagePlaceholder {
+    max-width: 120px;
+  }
+
+  .uploadBtn {
+    max-width: 120px;
+    font-size: 0.8rem;
+    padding: 5px 10px;
+  }
+}
