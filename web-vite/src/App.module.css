@@ -89,7 +89,7 @@
         align-items: center;
         flex-direction: column;
         width: 100%;
-        gap: 5%;
+        gap: 20px;
     }
     .TitleFeedback{
         font-size: 3rem;
@@ -169,15 +169,18 @@
 .TitleFeedback{
     font-size: 2rem;
 }
+.buttonFeedbacks{
+    width: 9    0%;
+}
 
 }
 
 @media (max-width: 460px) {
     .TitleFeedback{
-        font-size: 1.5rem;
+        font-size: 1.7rem;
     }
     .paragrafoFeedback{
-        font-size: 0.9rem;
+        font-size: 1.1rem;
         padding-top: 1rem;
         width: 90%;
         color: aliceblue;
@@ -186,6 +189,9 @@
     
 .s1{
     min-height: 10vh;
+}
+.containerFeedbacks{
+    gap: 20px;
 }
 
 }
