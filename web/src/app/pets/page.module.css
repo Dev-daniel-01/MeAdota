@@ -20,10 +20,9 @@
 }
 
 .card {
-
     background-color: #EFEFEF;
     width: 300px;
-    height: 380px;
+    height: 330px;
     margin-bottom: 5%;
     border-radius: 16px;
     border: 1px solid #BEBEBE;
@@ -32,7 +31,7 @@
 .image {
     border-radius: 16px 16px 0 0;
     width: 100%;
-    height: 70%;
+    object-fit: cover;
 }
 
 .cardContent {
@@ -60,10 +59,16 @@
     font-weight: 700;
 }
 
+@media (max-width: 1200px){
+    
+.cardsFlex {
+      padding-top: 12%;
+}
+}
 @media (max-width: 1000px){
     
 .cardsFlex {
-      padding-top: 10%;
+      padding-top: 15%;
 }
 }
 
@@ -83,8 +88,8 @@
 
 @media (max-width: 430px){
     .card {
-    width: 170px;
-    height: 270px;
+    width: 150px;
+    height: 300px;
 }
 
 .cardContent {
@@ -92,7 +97,7 @@
 }
 
 .location {
-    font-size: 0.8rem;
+    font-size: 12px;
     color: #000000;
     opacity: 0.7;
     font-weight: 700;
