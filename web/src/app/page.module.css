@@ -74,6 +74,10 @@
     height: auto;
 }
 
+.adocaoButton{
+    font-size: 14px;
+
+}
 }
 
 @media (max-width: 870px) {
@@ -85,7 +89,7 @@
 .adocaoButton{
     width: 250px;
     height: 50px;
-    font-size: 18px;
+    font-size: 14px;
 }
 
 
@@ -123,6 +127,29 @@
 
 }
 
+@media (max-width: 650px) {
+
+    .adocaoP{
+        font-size: 1rem;
+    }
+    .adocaoTitle{
+        font-size: 1.5rem;
+    }
+    
+    .adocaoImg{
+        width: 190px;
+        height: auto;
+    }
+    
+    .adocaoButton{
+        width: 200px;
+        height: 40px;
+        font-size: 12px;
+    }
+    
+    
+    }
+    
 
 @media (max-width: 460px) {
 
