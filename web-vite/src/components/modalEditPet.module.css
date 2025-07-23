@@ -7,7 +7,6 @@
   --btn-gray: #aaa;
 }
 
-/* === Overlay e modal === */
 .overlay {
   position: fixed;
   inset: 0;
@@ -28,6 +27,8 @@
   padding: 1rem;
   width: 100%;
   max-width: 800px;
+  height: 452px;
+  height: auto;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
@@ -109,17 +110,18 @@
   flex-wrap: wrap;
 }
 
-/* Campos */
 .inputGroup {
   flex: 1;
   display: flex;
   flex-direction: column;
   min-width: 140px; 
+
 }
 
 .inputGroup label {
   font-size: 0.85rem;
   margin-bottom: 4px;
+  overflow: hidden;
 }
 
 input,
@@ -133,14 +135,15 @@ textarea {
   resize: none;
 }
 
-/* Campo com ícone */
 .inputWithIcon {
   position: relative;
+  overflow-y: hidden;
 }
 
 .inputWithIcon input,
 .inputWithIcon select {
-  padding-right: 36px; /* espaço para o ícone */
+  padding-right: 36px; 
+  overflow-y: hidden;
 }
 
 .inputWithIcon img {
@@ -154,7 +157,6 @@ textarea {
   filter: brightness(0) saturate(100%);
 }
 
-/* Toggle / checkbox */
 .toggleAvailable {
   display: flex;
   align-items: center;
@@ -168,6 +170,7 @@ textarea {
   gap: 8px;
   cursor: pointer;
   font-size: 0.9rem;
+ 
 }
 
 .checkboxLabel input[type="checkbox"] {
@@ -176,12 +179,11 @@ textarea {
   cursor: pointer;
 }
 
-/* Botões */
 .buttonsRow {
   display: flex;
   justify-content: space-between;
   gap: 10px;
-  margin-top: 10px;
+  margin-top: 7px;
 }
 
 .saveBtn,
@@ -218,6 +220,11 @@ textarea {
   .contentWrapper {
     flex-direction: column;
     align-items: center;
+  }
+
+  .petImage,
+  .imagePlaceholder {
+    max-width: 140px;
   }
 }
 

@@ -22,7 +22,7 @@ export default function ModalProfile({ onClose }) {
     <div className={style.modalOverlay}>
       <div className={style.modalContainer}>
         <div className={style.modalContainerDivs}>
-          <h1>Alterar  ou adicionar </h1>
+          <h1 className={style.sectionTitle}s>Alterar  ou adicionar </h1>
 
           <div className={style.modalWrap}>
             {/* Seção PET */}

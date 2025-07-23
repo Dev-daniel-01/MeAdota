@@ -23,7 +23,6 @@ export default function FeedbackSlider() {
     fetchFeedbacks();
   }, []);
 
-  // Avança o slider a cada 5s
   useEffect(() => {
     if (!loading && feedbacks.length > 0) {
       const interval = setInterval(() => {
@@ -47,10 +46,8 @@ export default function FeedbackSlider() {
           {index === current && (
             <div className={style.card}>
               
-              {/* DIV PAI que divide 60% / 40% */}
               <div className={style.parentDiv}>
 
-                {/* Lado esquerdo 60% */}
                 <div className={style.leftDiv}>
                   <div className={style.wrapUser}>
                     <img src={user} alt="user" width={60} height={60} />
@@ -67,7 +64,6 @@ export default function FeedbackSlider() {
                   </div>
                 </div>
 
-                {/* Lado direito 40% */}
                 <div className={style.rightDiv}>
                   <div className={style.wrapTexts}>
                     <p className={style.text}>{fb.comment}</p>
@@ -76,11 +72,6 @@ export default function FeedbackSlider() {
                 </div>
 
               </div>
-
-              {/* Opcional: terceira div como rodapé */}
-              {/* <div className={style.footerDiv}>
-                Rodapé ou outro conteúdo aqui
-              </div> */}
 
             </div>
           )}

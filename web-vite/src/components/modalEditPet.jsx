@@ -11,19 +11,32 @@ import iconComment from "../assets/images/description.png";
 const storedUser = JSON.parse(localStorage.getItem("user") || "{}");
 
 export default function ModalEditPet({ petData, onClose, onSave }) {
+  const [previewImage, setPreviewImage] = useState(petData.image || null);
+
   const [formData, setFormData] = useState({
     name: petData.name || "",
     race: petData.race || "",
     animal: petData.animal || "",
-    age: petData.age !== undefined ? petData.age.toString() : "", // manter como string para input
+    age: petData.age !== undefined ? petData.age.toString() : "",
     size: petData.size || "",
     description: petData.description || "",
     available: petData.available ?? true,
     image: petData.image || "",
-    userId: petData.userId || storedUser.id, // para enviar no update
+    userId: petData.userId || storedUser.id,
   });
 
-  const tutorName = petData.user?.name || "";
+  // 👉 Apenas seleciona a imagem e atualiza o preview + formData.image
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setPreviewImage(reader.result);
+      setFormData((prev) => ({ ...prev, image: reader.result }));
+    };
+    reader.readAsDataURL(file);
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -43,21 +56,22 @@ export default function ModalEditPet({ petData, onClose, onSave }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Converter age para float e garantir userId número
     const dataToSend = {
       name: formData.name,
       race: formData.race,
       animal: formData.animal,
-      age: parseFloat(formData.age), // conversão
+      age: parseFloat(formData.age),
       size: formData.size,
       description: formData.description,
       available: formData.available,
-      image: formData.image,
-      userId: Number(formData.userId), // garantia número
+      image: formData.image, // 👈 vai com a nova imagem (se trocada)
+      userId: Number(formData.userId),
     };
 
     onSave(dataToSend);
   };
+
+  const tutorName = petData.user?.name || storedUser.name || "";
 
   return (
     <div className={style.overlay}>
@@ -65,19 +79,36 @@ export default function ModalEditPet({ petData, onClose, onSave }) {
         <h2>Editar Pet</h2>
 
         <div className={style.contentWrapper}>
-          {/* Seção da Imagem */}
+          {/* Seção de imagem */}
           <div className={style.imageSection}>
-            {formData.image ? (
-              <img src={formData.image} alt="Pet" className={style.petImage} />
+            {previewImage ? (
+              <img src={previewImage} alt="Pet" className={style.petImage} />
             ) : (
-              <div className={style.imagePlaceholder}>Adicione a foto do seu pet</div>
+              <div className={style.imagePlaceholder}>
+                Adicione a foto do seu pet
+              </div>
             )}
-            <button className={style.uploadBtn}>Enviar Imagem</button>
+
+            {/* Input escondido */}
+            <input
+              id="editImageInput"
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              style={{ display: "none" }}
+            />
+
+            {/* Botão que abre o seletor */}
+            <button
+              type="button"
+              className={style.uploadBtn}
+              onClick={() => document.getElementById("editImageInput").click()}
+            >
+              Enviar Imagem
+            </button>
           </div>
 
-          {/* Seção do Formulário */}
           <form className={style.formSection} onSubmit={handleSubmit}>
-            {/* Nome */}
             <div className={style.row}>
               <div className={style.inputGroup}>
                 <label>Nome:</label>
@@ -93,7 +124,6 @@ export default function ModalEditPet({ petData, onClose, onSave }) {
                 </div>
               </div>
 
-              {/* Raça */}
               <div className={style.inputGroup}>
                 <label>Raça:</label>
                 <div className={style.inputWithIcon}>
@@ -108,7 +138,6 @@ export default function ModalEditPet({ petData, onClose, onSave }) {
                 </div>
               </div>
 
-              {/* Animal */}
               <div className={style.inputGroup}>
                 <label>Animal:</label>
                 <div className={style.inputWithIcon}>
@@ -124,7 +153,6 @@ export default function ModalEditPet({ petData, onClose, onSave }) {
               </div>
             </div>
 
-            {/* Idade / Porte / Tutor */}
             <div className={style.row}>
               <div className={style.inputGroup}>
                 <label>Idade:</label>
@@ -160,7 +188,6 @@ export default function ModalEditPet({ petData, onClose, onSave }) {
               </div>
             </div>
 
-            {/* Descrição */}
             <div className={style.inputGroup}>
               <label>Descrição:</label>
               <div className={style.inputWithIcon}>
@@ -174,7 +201,6 @@ export default function ModalEditPet({ petData, onClose, onSave }) {
               </div>
             </div>
 
-            {/* Disponibilidade */}
             <div className={style.inputGroup}>
               <label>Disponibilidade:</label>
               <div className={style.toggleAvailable}>
@@ -189,7 +215,6 @@ export default function ModalEditPet({ petData, onClose, onSave }) {
               </div>
             </div>
 
-            {/* Botões */}
             <div className={style.buttonsRow}>
               <button type="submit" className={style.saveBtn}>
                 Salvar Alterações
