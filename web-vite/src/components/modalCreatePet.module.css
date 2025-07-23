@@ -239,7 +239,6 @@
   }
 }
 
-/* NOVO: Ícones dentro dos inputs */
 .inputWithIcon {
   position: relative;
   display: flex;
@@ -262,6 +261,7 @@
   opacity: 0.8;
   filter: brightness(0) saturate(100%);
 }
+
 
 .inputWithIcon:focus-within {
   border-color: #4CAF50;

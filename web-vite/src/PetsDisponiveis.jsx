@@ -34,11 +34,9 @@ export default function PetsDisponiveis() {
         const data = await res.json();
         const disponiveis = data.filter((pet) => pet.available);
 
-        // mostra primeiro sem endereço
         setAllPets(disponiveis);
         setFilteredPets(disponiveis);
 
-        // depois busca endereços sem travar a tela
         const petsComEndereco = await Promise.all(
           disponiveis.map(async (pet) => {
             const cepLimpo = pet.user.cep.replace(/\D/g, "");
@@ -74,20 +72,18 @@ export default function PetsDisponiveis() {
   const handleSearch = (term) => {
     const lowerTerm = term.toLowerCase();
 
-    // Se não digitou nada, mostra todos
     if (!term.trim()) {
       setFilteredPets(allPets);
       return;
     }
 
-    // Filtros praa busca 
     const filtrados = allPets.filter(
       (pet) =>
-        pet.name.toLowerCase().includes(lowerTerm) ||           // nome do pet
-        pet.animal?.toLowerCase().includes(lowerTerm) ||        // tipo do animal
-        pet.race?.toLowerCase().includes(lowerTerm) ||          // raça
-        pet.user.name.toLowerCase().includes(lowerTerm) ||      // nome do dono
-        pet.enderecoFormatado.toLowerCase().includes(lowerTerm) // cidade/UF
+        pet.name.toLowerCase().includes(lowerTerm) ||    
+        pet.animal?.toLowerCase().includes(lowerTerm) ||    
+        pet.race?.toLowerCase().includes(lowerTerm) ||        
+        pet.user.name.toLowerCase().includes(lowerTerm) ||      
+        pet.enderecoFormatado.toLowerCase().includes(lowerTerm) 
     );
 
     setFilteredPets(filtrados);

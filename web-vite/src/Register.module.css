@@ -140,7 +140,7 @@
 .feedback {
   margin-top: 0.5rem;
   font-size: 0.9rem;
-  color: #d00; /* erro */
+  color: #d00; 
 }
 
 @media (max-width: 1380px) {

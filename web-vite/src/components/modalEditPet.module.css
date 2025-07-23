@@ -114,15 +114,16 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  min-width: 140px; 
 
 }
 
 .inputGroup label {
   font-size: 0.85rem;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
   overflow: hidden;
 }
+
+
 
 input,
 select,
@@ -133,6 +134,11 @@ textarea {
   border: 1px solid var(--border-color);
   border-radius: 6px;
   resize: none;
+}
+
+textarea{
+  height: 40px;
+  margin-bottom: 1rem;
 }
 
 .inputWithIcon {
@@ -150,6 +156,18 @@ textarea {
   position: absolute;
   right: 10px;
   top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+  filter: brightness(0) saturate(100%);
+}
+
+
+.inputWithIcon .imgTextArea {
+  position: absolute;
+  right: 10px;
+  top: 35%;
   transform: translateY(-50%);
   width: 18px;
   height: 18px;
@@ -215,7 +233,6 @@ textarea {
   background: #888;
 }
 
-/* RESPONSIVO */
 @media (max-width: 992px) {
   .contentWrapper {
     flex-direction: column;
@@ -227,6 +244,7 @@ textarea {
     max-width: 140px;
   }
 }
+
 
 
 
@@ -246,3 +264,5 @@ textarea {
     padding: 5px 10px;
   }
 }
+
+

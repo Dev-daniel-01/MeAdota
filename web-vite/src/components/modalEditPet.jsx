@@ -79,7 +79,6 @@ export default function ModalEditPet({ petData, onClose, onSave }) {
         <h2>Editar Pet</h2>
 
         <div className={style.contentWrapper}>
-          {/* Seção de imagem */}
           <div className={style.imageSection}>
             {previewImage ? (
               <img src={previewImage} alt="Pet" className={style.petImage} />
@@ -89,7 +88,6 @@ export default function ModalEditPet({ petData, onClose, onSave }) {
               </div>
             )}
 
-            {/* Input escondido */}
             <input
               id="editImageInput"
               type="file"
@@ -98,7 +96,6 @@ export default function ModalEditPet({ petData, onClose, onSave }) {
               style={{ display: "none" }}
             />
 
-            {/* Botão que abre o seletor */}
             <button
               type="button"
               className={style.uploadBtn}
@@ -197,7 +194,7 @@ export default function ModalEditPet({ petData, onClose, onSave }) {
                   onChange={handleChange}
                   placeholder="Descrição do pet"
                 />
-                <img src={iconComment} alt="icone descrição" />
+                <img src={iconComment} alt="icone descrição" className={style.imgTextArea}/>
               </div>
             </div>
 
