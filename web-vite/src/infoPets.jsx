@@ -8,6 +8,8 @@ import { Menu2 } from "./components/menu2";
 import { Footer } from "./components/footer";
 import ModalCreatePet from "./components/modalCreatePet";
 import ModalEditPet from "./components/modalEditPet";
+import Alert from "./components/alert";
+import ConfirmAlert from "./components/alertconfirm";
 
 import descriptionIcon from "../src/assets/images/description.png";
 import dogface from "../src/assets/images/dogFace.png";
@@ -24,13 +26,18 @@ export default function InfoPets() {
   const [loading, setLoading] = useState(true);
   const [showModalAdd, setShowModalAdd] = useState(false);
   const [selectedPet, setSelectedPet] = useState(null);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [confirmVisible, setConfirmVisible] = useState(false);
+  const [petToDelete, setPetToDelete] = useState(null);
+
+  const closeAlert = () => setAlertMessage("");
 
   const storedUser = JSON.parse(localStorage.getItem("user") || "{}");
 
   useEffect(() => {
     const fetchMyPets = async () => {
       if (!storedUser?.id) {
-        alert("Você precisa estar logado para acessar seus pets!");
+        setAlertMessage("Você precisa estar logado para acessar seus pets!");
         navigate("/login");
         return;
       }
@@ -41,8 +48,6 @@ export default function InfoPets() {
         const meusPets = data.filter(
           (pet) => Number(pet.userId) === Number(storedUser.id)
         );
-
-        console.log("🐶 Meus pets encontrados:", meusPets);
 
         const petsComEndereco = await Promise.all(
           meusPets.map(async (pet) => {
@@ -78,16 +83,22 @@ export default function InfoPets() {
     fetchMyPets();
   }, []);
 
-  const handleDeletePet = async (petId) => {
-    const confirmDelete = confirm("Tem certeza que deseja excluir este pet?");
-    if (!confirmDelete) return;
+  const handleDeletePet = (petId) => {
+    setPetToDelete(petId);
+    setConfirmVisible(true);
+  };
 
+  const confirmDeletePet = async () => {
     try {
-      await api.delete(`/pets/${petId}`);
-      setMyPets((prev) => prev.filter((p) => p.id !== petId));
+      await api.delete(`/pets/${petToDelete}`);
+      setMyPets((prev) => prev.filter((p) => p.id !== petToDelete));
+      setAlertMessage("🐾 Pet excluído com sucesso!");
     } catch (error) {
       console.error("❌ Erro ao excluir pet:", error);
-      alert("Erro ao excluir o pet. Tente novamente.");
+      setAlertMessage("Erro ao excluir o pet. Tente novamente.");
+    } finally {
+      setConfirmVisible(false);
+      setPetToDelete(null);
     }
   };
 
@@ -99,48 +110,44 @@ export default function InfoPets() {
     try {
       const { data } = await api.put(`/pets/${selectedPet.id}`, updatedData);
 
-      // Atualiza a lista localmente
       setMyPets((prev) =>
         prev.map((p) => (p.id === selectedPet.id ? { ...p, ...data } : p))
       );
 
-      alert("✅ Pet atualizado com sucesso!");
-      setSelectedPet(null); // fecha modal
+      setAlertMessage("✅ Pet atualizado com sucesso!");
+      setSelectedPet(null);
     } catch (error) {
       console.error("❌ Erro ao atualizar pet:", error);
-      alert("Erro ao atualizar o pet!");
+      setAlertMessage("❌ Erro ao atualizar o pet!");
     }
   };
 
   const handleAddPet = async (newPet) => {
     try {
       if (!storedUser?.id) {
-        alert("Você precisa estar logado para adicionar um pet!");
+        setAlertMessage("Você precisa estar logado para adicionar um pet!");
         navigate("/login");
         return;
       }
 
       const petData = {
         ...newPet,
-        age: parseFloat(newPet.age),       // Convertendo idade para número
-        userId: Number(storedUser.id),     // Garantindo userId como número
+        age: parseFloat(newPet.age),
+        userId: Number(storedUser.id),
         available: true,
       };
-
-      console.log("📤 Enviando para API:", petData);
 
       const { data: createdPet } = await api.post("/pets", petData);
 
       setMyPets((prev) => [...prev, createdPet]);
-      alert("✅ Pet adicionado com sucesso!");
+      setAlertMessage("✅ Pet adicionado com sucesso!");
     } catch (error) {
       console.error("❌ Erro ao adicionar pet:", error);
 
       if (error.response) {
-        console.log("🔴 API Response:", error.response.data);
-        alert(`Erro do servidor: ${error.response.data.message || "Verifique os campos enviados"}`);
+        setAlertMessage(`Erro do servidor: ${error.response.data.message || "Verifique os campos enviados"}`);
       } else {
-        alert("Erro desconhecido ao adicionar o pet!");
+        setAlertMessage("Erro desconhecido ao adicionar o pet!");
       }
     }
   };
@@ -156,7 +163,6 @@ export default function InfoPets() {
           <div className={style.cardsFlex}>
             {myPets.map((pet) => (
               <div key={pet.id} className={style.card}>
-                {/* Imagem e dono */}
                 <div className={style.cardImage}>
                   <img src={pet.image} alt={pet.name} className={style.image} />
                   <p className={style.ownerName}>
@@ -165,62 +171,44 @@ export default function InfoPets() {
                   </p>
                 </div>
 
-                {/* Conteúdo */}
                 <div className={style.cardContent}>
                   <h1 className={style.petName}>
                     <img src={dogface} alt="Pet" className={style.iconName} />
                     {pet.name}
                   </h1>
 
-                  {/* Infos rápidas */}
                   <div className={style.containerInfos}>
                     <div className={style.infoRow}>
                       <img src={pataNegra} alt="Tipo" className={style.icon} />
                       <span>{pet.animal}</span>
                     </div>
-
                     <div className={style.infoRow}>
                       <img src={raceIcon} alt="Raça" className={style.icon} />
                       <span>{pet.race}</span>
                     </div>
-
                     <div className={style.infoRow}>
                       <img src={ageIcon} alt="Idade" className={style.icon} />
                       <span>{pet.age}</span>
                     </div>
-
                     <div className={style.infoRow}>
                       <img src={porteIcon} alt="Porte" className={style.icon} />
                       <span>{pet.size}</span>
                     </div>
                   </div>
 
-                  {/* Descrição */}
                   <div className={style.descriptionSection}>
                     <img src={descriptionIcon} alt="Descrição" className={style.icon} />
                     <p>{pet.description}</p>
                   </div>
 
-                  {/* Localização */}
                   <div className={style.locationSection}>
                     <img src={locationIcon} alt="Localização" className={style.icon} />
                     <span>{pet.enderecoFormatado}</span>
                   </div>
 
-                  {/* Botões */}
                   <div className={style.buttonsRow}>
-                    <button
-                      className={style.editButton}
-                      onClick={() => handleEditPet(pet)}
-                    >
-                      Editar
-                    </button>
-                    <button
-                      className={style.deleteButton}
-                      onClick={() => handleDeletePet(pet.id)}
-                    >
-                      Excluir
-                    </button>
+                    <button className={style.editButton} onClick={() => handleEditPet(pet)}>Editar</button>
+                    <button className={style.deleteButton} onClick={() => handleDeletePet(pet.id)}>Excluir</button>
                   </div>
                 </div>
               </div>
@@ -233,6 +221,7 @@ export default function InfoPets() {
         )}
 
         <button className={style.buttonAddPet} onClick={() => setShowModalAdd(true)}>Adicionar Pet</button>
+
         {showModalAdd && (
           <ModalCreatePet
             onClose={() => setShowModalAdd(false)}
@@ -245,6 +234,19 @@ export default function InfoPets() {
             petData={selectedPet}
             onClose={() => setSelectedPet(null)}
             onSave={handleUpdatePet}
+          />
+        )}
+
+        <Alert
+          message={alertMessage}
+          onClose={closeAlert}
+        />
+
+        {confirmVisible && (
+          <ConfirmAlert
+            message="Tem certeza que deseja excluir este pet?"
+            onConfirm={confirmDeletePet}
+            onCancel={() => setConfirmVisible(false)}
           />
         )}
       </section>

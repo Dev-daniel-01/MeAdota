@@ -1,9 +1,11 @@
 import style from "./modalZap.module.css";
 import { useState } from "react";
-
+import Alert from "./alert";
 export default function ModalZap({ onClose, pet }) {
   const [formData, setFormData] = useState({ name: "", subject: "" });
+  const [alertMessage, setAlertMessage] = useState("");
 
+  const closeAlert = () => setAlertMessage("");
   const tutorName = pet?.user?.name || "Tutor";
   const tutorPhone = pet?.user?.telephone || "";
 
@@ -21,12 +23,12 @@ export default function ModalZap({ onClose, pet }) {
 
   const handleSubmit = () => {
     if (!formData.name.trim() || !formData.subject.trim()) {
-      alert("Por favor, preencha todos os campos");
+      setAlertMessage("Por favor, preencha todos os campos");
       return;
     }
 
     if (!tutorPhone) {
-      alert("Número do tutor não disponível");
+      setAlertMessage("Número do tutor não disponível");
       return;
     }
 
@@ -85,6 +87,10 @@ export default function ModalZap({ onClose, pet }) {
         )}
           </div>
         </div>
+        <Alert
+        message={alertMessage}
+        onClose={closeAlert}
+          />
     </div>
   );
 }

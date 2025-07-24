@@ -8,10 +8,10 @@ import iconEmail from "../assets/images/logoEmail.png";
 import iconPassword from "../assets/images/logoSenha.png";
 import iconPhone from "../assets/images/telephone.png";
 import iconCep from "../assets/images/logoCep.png";
-
-// ✅ Importa os ícones para mostrar/ocultar senha
+import Alert from "./alert";
 import eyeOpen from "../assets/images/view.png";
 import eyeClosed from "../assets/images/hide.png";
+import { useNavigate } from "react-router";
 
 export default function ModalUpdateUser({ onClose }) {
   const [userData, setUserData] = useState({
@@ -26,6 +26,12 @@ export default function ModalUpdateUser({ onClose }) {
   const [showPassword, setShowPassword] = useState(false); 
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
+  const [alertMessage, setAlertMessage] = useState("");
+  
+
+  const closeAlert = () => setAlertMessage("");
+
+  const navigate = useNavigate();
 
   const storedUser = JSON.parse(localStorage.getItem("user") || "{}");
 
@@ -37,7 +43,7 @@ export default function ModalUpdateUser({ onClose }) {
         setUserData({ name, email, telephone, cep, password: "" });
       } catch (err) {
         console.error(err);
-        setMessage("Erro ao carregar dados do usuário.");
+        setAlertMessage("Erro ao carregar dados do usuário.");
       } finally {
         setLoading(false);
       }
@@ -46,7 +52,7 @@ export default function ModalUpdateUser({ onClose }) {
     if (storedUser?.id) {
       fetchUser();
     } else {
-      setMessage("Usuário não encontrado. Faça login novamente.");
+      setAlertMessage("Usuário não encontrado. Faça login novamente.");
       setLoading(false);
     }
   }, []);
@@ -61,7 +67,7 @@ export default function ModalUpdateUser({ onClose }) {
     setMessage("");
 
     if (userData.password && userData.password !== confirmPassword) {
-      setMessage("❌ As senhas não coincidem!");
+      setAlertMessage("❌ As senhas não coincidem!");
       return;
     }
 
@@ -73,16 +79,21 @@ export default function ModalUpdateUser({ onClose }) {
         JSON.stringify({ ...storedUser, ...userData })
       );
 
-      setMessage("✅ Dados atualizados com sucesso!");
+      setAlertMessage("✅ Dados atualizados com sucesso!");
       setTimeout(() => onClose(), 1500);
     } catch (err) {
       console.error(err);
-      setMessage(
+      setAlertMessage(
         "Erro ao atualizar: " +
           (err.response?.data?.message || "Tente novamente.")
       );
     }
   };
+
+  const logOut = () => {
+    localStorage.removeItem('user');
+    navigate("/");
+  }
 
   return (
     <section className={style.modalOverlay}>
@@ -99,6 +110,8 @@ export default function ModalUpdateUser({ onClose }) {
         {loading ? (
           <p>Carregando...</p>
         ) : (
+          <>
+       
           <form onSubmit={handleUpdate} className={style.form}>
             {/* Nome */}
             <div className={style.inputGroup}>
@@ -199,11 +212,21 @@ export default function ModalUpdateUser({ onClose }) {
             <button type="submit" className={style.submitButton}>
               CONCLUIR
             </button>
+
           </form>
-        )}
+          <button onClick={logOut} className={style.logOutButton}>
+                      Log-Out
+          </button>
+          </>
+              )}
         </div>
+ 
 
       </div>
+      <Alert
+        message={alertMessage}
+        onClose={closeAlert}
+          />
     </section>
   );
 }

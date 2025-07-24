@@ -10,7 +10,7 @@ import logoEmail from "../src/assets/images/logoEmail.png";
 import logoSenha from "../src/assets/images/logoSenha.png";
 import logoTelefone from "../src/assets/images/logoTelefone.png";
 import logoCep from "../src/assets/images/logoCep.png";
-
+import Alert from "./components/alert";
 // Ícones do olho
 import eyeOpen from "../src/assets/images/view.png";  
 import eyeClosed from "../src/assets/images/hide.png";
@@ -28,7 +28,9 @@ export default function Register() {
 
   const [message, setMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false); // controla visibilidade
+  const [alertMessage, setAlertMessage] = useState("");
 
+  const closeAlert = () => setAlertMessage("");
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
@@ -39,10 +41,10 @@ export default function Register() {
 
     try {
       await api.post("/users", user);
-      setMessage("Usuário cadastrado com sucesso!");
+      setAlertMessage("Usuário cadastrado com sucesso!");
       setTimeout(() => navigate("/adocao"), 1500);
     } catch (error) {
-      setMessage(
+      setAlertMessage(
         "Erro ao cadastrar: " +
           (error.response?.data?.message || "Verifique os dados.")
       );
@@ -147,6 +149,10 @@ export default function Register() {
           </button>
         </div>
       </div>
+      <Alert
+        message={alertMessage}
+        onClose={closeAlert}
+          />
     </section>
   );
 }

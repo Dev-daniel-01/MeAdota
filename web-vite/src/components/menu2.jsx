@@ -7,14 +7,16 @@ import style from "./menu2.module.css";
 import logoNav from "../assets/images/logo.png";
 import profileNav from "../assets/images/Profile.png";
 import search from "../assets/images/search.png";
-
+import Alert from "./alert";
 import ModalProfile from "./modalProfile";
 
 export const Menu2 = ({ onSearch }) => {
   const navigate = useNavigate();
 
   const [showModal, setShowModal] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
 
+  const closeAlert = () => setAlertMessage("");
   const handleSearchChange = (e) => {
     const value = e.target.value;
     onSearch(value);
@@ -24,7 +26,7 @@ export const Menu2 = ({ onSearch }) => {
     const user = localStorage.getItem("user");
 
     if (!user) {
-      alert("Você precisa estar logado para acessar o perfil!");
+      setAlertMessage("Você precisa estar logado para acessar o perfil!");
       navigate("/login");
       return; 
     }
@@ -75,6 +77,12 @@ export const Menu2 = ({ onSearch }) => {
             />
           </div>
         </div>
+
+
+        <Alert
+        message={alertMessage}
+        onClose={closeAlert}
+          />
       </nav>
 
       {showModal && <ModalProfile onClose={closeModal} />}

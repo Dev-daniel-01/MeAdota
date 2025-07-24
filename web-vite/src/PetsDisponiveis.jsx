@@ -3,7 +3,7 @@ import { Menu2 } from "./components/menu2";
 import style from "./PetsDisponiveis.module.css";
 import { Footer } from "./components/footer";
 import { useNavigate } from "react-router";
-
+import Alert from "./components/alert";
 
 export default function PetsDisponiveis() {
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ export default function PetsDisponiveis() {
   const user = localStorage.getItem("user");
 
   if (!user) {
-    alert("Você precisa estar logado para adotar um pet!");
+    setAlertMessage("Você precisa estar logado para adotar um pet!");
     navigate("/login");
     return;
   }
@@ -26,7 +26,9 @@ export default function PetsDisponiveis() {
   const [allPets, setAllPets] = useState([]);
   const [filteredPets, setFilteredPets] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [alertMessage, setAlertMessage] = useState("");
 
+  const closeAlert = () => setAlertMessage("");
   useEffect(() => {
     const fetchPets = async () => {
       try {
@@ -129,6 +131,11 @@ export default function PetsDisponiveis() {
             </button>
           </div>
         )}
+
+        <Alert
+        message={alertMessage}
+        onClose={closeAlert}
+          />
 
       </section>
 

@@ -118,12 +118,31 @@ img.toBlackEye {
   padding: 14px;
   border-radius: 8px;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: all  0.3s ease-in-out;
 }
 
 .submitButton:hover {
   background: #2f5724;
 }
+
+.logOutButton{
+  width: 100%;
+  margin-top: 1rem;
+  background: #b50808;
+  color: #fff;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out; 
+}
+
+.logOutButton:hover {
+  background: #720101;
+}
+
 
 .message {
   font-size: 14px;

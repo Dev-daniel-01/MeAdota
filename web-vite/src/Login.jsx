@@ -7,7 +7,7 @@
   import logoLogin from "../src/assets/images/logoLogin.png";
   import logoEmail from "../src/assets/images/logoEmail.png";
   import logoSenha from "../src/assets/images/logoSenha.png";
-
+  import Alert from "./components/alert";
   import eyeOpen from "../src/assets/images/view.png";
   import eyeClosed from "../src/assets/images/hide.png";
 
@@ -19,7 +19,10 @@
     const [message, setMessage] = useState("");
     const [user, setUser] = useState(null);
     const [showPassword, setShowPassword] = useState(false);
+    const [alertMessage, setAlertMessage] = useState("");
 
+    const closeAlert = () => setAlertMessage("");
+  
     useEffect(() => {
       const storedUser = localStorage.getItem("user");
       if (storedUser) {
@@ -39,7 +42,7 @@
         setUser(userData);
         navigate("/adocao");
       } catch (error) {
-        setMessage(
+        setAlertMessage(
           "Erro ao fazer login: " +
             (error.response?.data?.message || "Verifique seus dados.")
         );
@@ -107,6 +110,11 @@
             </p>
           </div>
         </div>
+
+        <Alert
+        message={alertMessage}
+        onClose={closeAlert}
+          />
       </section>
     );
   }
