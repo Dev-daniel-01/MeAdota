@@ -32,9 +32,9 @@ export default function Home() {
                 <p className={styles.adocaoP}>Explore nossa galeria de pets e encontre o companheiro perfeito para sua família</p>
                 <div className={styles.wrapAdocao}>
                   <Image src={dogAdocao} alt='cachorro' className={styles.adocaoImg}></Image>
-                  <button className={styles.adocaoButton} onClick={() => router.push('/pets')}>Ver Pets para Adoção</button>
                   <Image src={catAdocao} alt='gato' className={styles.adocaoImg}></Image>
                 </div>
+                <button className={styles.adocaoButton} onClick={() => router.push('/pets')}>Ver Pets para Adoção</button>
         </div>
           
       </section>
