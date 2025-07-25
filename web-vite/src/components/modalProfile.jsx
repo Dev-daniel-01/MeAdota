@@ -5,7 +5,7 @@ import style from "./modalProfile.module.css";
 import manPet from "../assets/images/manPet.png";
 import man from "../assets/images/man.png";
 
-import ModalUpdateUser from "./modalUpdateUser"; // Importamos o modal do usuário
+import ModalUpdateUser from "./modalUpdateUser"; 
 
 export default function ModalProfile({ onClose }) {
   const navigate = useNavigate()

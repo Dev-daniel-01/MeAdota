@@ -2,7 +2,6 @@ import style from "./footer.module.css";
 import logoNav from "../assets/images/logo.png";
 import instagram from "../assets/images/instagram.png";
 import whatsapp from "../assets/images/whatsapp.png";
-import facebook from "../assets/images/facebook.png";
 
 export const Footer = () => {
   return (
@@ -38,13 +37,6 @@ export const Footer = () => {
             <img 
               src={whatsapp} 
               alt="Whatsapp" 
-              className={style.iconsFooter} 
-            />
-          </a>
-          <a className={style.footerLink} href="/">
-            <img 
-              src={facebook} 
-              alt="Facebook" 
               className={style.iconsFooter} 
             />
           </a>

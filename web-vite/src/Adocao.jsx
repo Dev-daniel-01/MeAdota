@@ -51,11 +51,9 @@ export default function Adocao() {
 
         const disponiveis = data.filter((pet) => pet.available);
 
-        // mostra primeiro sem endereço
         setAllPets(disponiveis);
         setFilteredPets(disponiveis);
 
-        // depois busca endereços sem travar a tela
         const petsComEndereco = await Promise.all(
           disponiveis.map(async (pet) => {
             const cepLimpo = pet.user.cep.replace(/\D/g, "");
@@ -90,13 +88,10 @@ export default function Adocao() {
   const handleSearch = (term) => {
     const lowerTerm = term.toLowerCase();
 
-    // Se não digitou nada, mostra todos
     if (!term.trim()) {
       setFilteredPets(allPets);
       return;
     }
-
-    // Filtros para busca
     const filtrados = allPets.filter(
       (pet) =>
         pet.name.toLowerCase().includes(lowerTerm) ||           // nome do pet

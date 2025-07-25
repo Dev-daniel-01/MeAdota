@@ -9,6 +9,8 @@ import iconSize    from "../assets/images/porte.png";
 import iconUser    from "../assets/images/userBlack.png";
 import iconComment from "../assets/images/description.png";
 
+import Alert from "../components/alert";
+
 export default function ModalCreatePet({ onClose, onAddPet }) {
   const storedUser = JSON.parse(localStorage.getItem("user") || "{}");
 
@@ -23,6 +25,7 @@ export default function ModalCreatePet({ onClose, onAddPet }) {
   });
 
   const [previewImage, setPreviewImage] = useState(null);
+  const [alertMessage, setAlertMessage] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -40,21 +43,21 @@ export default function ModalCreatePet({ onClose, onAddPet }) {
     };
     reader.readAsDataURL(file);
   };
+  const closeAlert = () => setAlertMessage("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!formData.name || !formData.image) {
-      alert("⚠️ Nome e imagem são obrigatórios!");
+      setAlertMessage("⚠️ Nome e imagem são obrigatórios!");
       return;
     }
 
     const dataToSend = {
       ...formData,
-      age: formData.age ? parseFloat(formData.age) : 0 // garante número
+      age: formData.age ? parseFloat(formData.age) : 0 
     };
 
-    console.log("✅ Dados do form antes de enviar:", dataToSend);
 
     await onAddPet(dataToSend);
     onClose();
@@ -204,6 +207,10 @@ export default function ModalCreatePet({ onClose, onAddPet }) {
           <button type="submit" className={style.submitBtn}>Concluir</button>
         </form>
       </div>
+          {/* ✅ Alert só aparece se tiver mensagem */}
+          {alertMessage && (
+        <Alert message={alertMessage} onClose={closeAlert} />
+      )}
     </div>
   );
 }

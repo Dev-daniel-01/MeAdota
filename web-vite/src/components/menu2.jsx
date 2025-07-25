@@ -1,4 +1,3 @@
-// Menu2.jsx
 import { useState } from "react";
 import { useNavigate } from "react-router";
 
@@ -15,8 +14,8 @@ export const Menu2 = ({ onSearch }) => {
 
   const [showModal, setShowModal] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  const [redirectAfterAlert, setRedirectAfterAlert] = useState(false);
 
-  const closeAlert = () => setAlertMessage("");
   const handleSearchChange = (e) => {
     const value = e.target.value;
     onSearch(value);
@@ -27,11 +26,20 @@ export const Menu2 = ({ onSearch }) => {
 
     if (!user) {
       setAlertMessage("Você precisa estar logado para acessar o perfil!");
-      navigate("/login");
-      return; 
+      setRedirectAfterAlert(true);
+      return;
     }
 
     setShowModal(true);
+  };
+
+  const closeAlert = () => {
+    setAlertMessage("");
+
+    if (redirectAfterAlert) {
+      navigate("/login");
+      setRedirectAfterAlert(false);
+    }
   };
 
   const closeModal = () => {
@@ -77,13 +85,11 @@ export const Menu2 = ({ onSearch }) => {
             />
           </div>
         </div>
-
-
-        <Alert
-        message={alertMessage}
-        onClose={closeAlert}
-          />
       </nav>
+
+      {alertMessage && (
+        <Alert message={alertMessage} onClose={closeAlert} />
+      )}
 
       {showModal && <ModalProfile onClose={closeModal} />}
     </>

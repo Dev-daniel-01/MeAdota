@@ -7,28 +7,39 @@ import Alert from "./components/alert";
 
 export default function PetsDisponiveis() {
   const navigate = useNavigate();
-  
-  const gotoAdocao = () => {
-  const user = localStorage.getItem("user");
-
-  if (!user) {
-    setAlertMessage("Você precisa estar logado para adotar um pet!");
-    navigate("/login");
-    return;
-  }
-
-  navigate("/adocao");
-  };
-
-
 
 
   const [allPets, setAllPets] = useState([]);
   const [filteredPets, setFilteredPets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [alertMessage, setAlertMessage] = useState("");
+  const [redirectAfterAlert, setRedirectAfterAlert] = useState(false);
 
-  const closeAlert = () => setAlertMessage("");
+
+  const gotoAdocao = () => {
+    const user = localStorage.getItem("user");
+
+    if (!user) {
+      setAlertMessage("Você precisa estar logado para adotar um pet!");
+      setRedirectAfterAlert(true);
+      return;
+    }
+
+    navigate("/adocao");
+  };
+
+
+
+  const closeAlert = () => {
+    setAlertMessage("");
+  
+    if (redirectAfterAlert) {
+      navigate("/login");
+      setRedirectAfterAlert(false); 
+    }
+  };
+  
+
   useEffect(() => {
     const fetchPets = async () => {
       try {
@@ -81,11 +92,11 @@ export default function PetsDisponiveis() {
 
     const filtrados = allPets.filter(
       (pet) =>
-        pet.name.toLowerCase().includes(lowerTerm) ||    
-        pet.animal?.toLowerCase().includes(lowerTerm) ||    
-        pet.race?.toLowerCase().includes(lowerTerm) ||        
-        pet.user.name.toLowerCase().includes(lowerTerm) ||      
-        pet.enderecoFormatado.toLowerCase().includes(lowerTerm) 
+        pet.name.toLowerCase().includes(lowerTerm) ||
+        pet.animal?.toLowerCase().includes(lowerTerm) ||
+        pet.race?.toLowerCase().includes(lowerTerm) ||
+        pet.user.name.toLowerCase().includes(lowerTerm) ||
+        pet.enderecoFormatado.toLowerCase().includes(lowerTerm)
     );
 
     setFilteredPets(filtrados);
@@ -132,10 +143,13 @@ export default function PetsDisponiveis() {
           </div>
         )}
 
-        <Alert
-        message={alertMessage}
-        onClose={closeAlert}
+        {alertMessage && (
+          <Alert
+            message={alertMessage}
+            onClose={closeAlert}
           />
+        )}
+
 
       </section>
 
