@@ -220,7 +220,9 @@ export default function InfoPets() {
           <p>😢 Você ainda não cadastrou nenhum pet.</p>
         )}
 
-        <button className={style.buttonAddPet} onClick={() => setShowModalAdd(true)}>Adicionar Pet</button>
+        <div className={myPets.length === 0 ? style.centerButtonContainer : ""}>
+          <button className={style.buttonAddPet} onClick={() => setShowModalAdd(true)}>Adicionar Pet</button>
+        </div>
 
         {showModalAdd && (
           <ModalCreatePet

@@ -186,6 +186,13 @@
   background-color: #ee88bba9;
 }
 
+.centerButtonContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 
 /* ✅ Responsivo */
 @media (max-width: 900px) {
