@@ -4,4 +4,23 @@
   box-sizing: border-box;
   overflow-x: hidden;
   font-family: Arial, Helvetica, sans-serif;
+  ::-webkit-scrollbar {
+  width: 8px;            
+  height: 8px;           
 }
+
+::-webkit-scrollbar-track {
+  background: #6c087c;    
+
+}
+
+::-webkit-scrollbar-thumb {
+  background: #71378b;      
+border-radius: 4px;
+}
+
+
+
+
+}
+

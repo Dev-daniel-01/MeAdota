@@ -94,11 +94,11 @@ export default function Adocao() {
     }
     const filtrados = allPets.filter(
       (pet) =>
-        pet.name.toLowerCase().includes(lowerTerm) ||           // nome do pet
-        pet.animal?.toLowerCase().includes(lowerTerm) ||        // tipo do animal
-        pet.race?.toLowerCase().includes(lowerTerm) ||          // raça
-        pet.user.name.toLowerCase().includes(lowerTerm) ||      // nome do dono
-        pet.enderecoFormatado?.toLowerCase().includes(lowerTerm) // cidade/UF
+        pet.name.toLowerCase().includes(lowerTerm) ||        
+        pet.animal?.toLowerCase().includes(lowerTerm) ||       
+        pet.race?.toLowerCase().includes(lowerTerm) ||         
+        pet.user.name.toLowerCase().includes(lowerTerm) ||      
+        pet.enderecoFormatado?.toLowerCase().includes(lowerTerm) 
     );
 
     setFilteredPets(filtrados);
@@ -106,7 +106,7 @@ export default function Adocao() {
 
   return (
     <>
-      <Menu2 onSearch={handleSearch} />
+      <Menu2 onSearch={handleSearch} option01="petsDisponiveis"/>
 
       <section className={style.container}>
         {loading && <p>🔄 Carregando pets disponíveis...</p>}

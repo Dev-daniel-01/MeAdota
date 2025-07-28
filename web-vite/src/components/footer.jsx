@@ -7,7 +7,6 @@ export const Footer = () => {
   
   const acessarInsta = () => {
     const URLinsta = `https://www.instagram.com/me_adota2025/?next=%2F`
-
     window.open(URLinsta, "_blank")
   }
   
@@ -16,7 +15,6 @@ export const Footer = () => {
   return (
     <footer className={style.Footer}>
       
-      {/* Logo lado esquerdo */}
       <div className={style.footerSide}>
         <img 
           src={logoNav} 
@@ -27,16 +25,15 @@ export const Footer = () => {
         />
       </div>
 
-      {/* Texto central */}
       <div className={style.footerCenter}>
         <p>@2025 direitos reservados</p>
       </div>
 
-      {/* Ícones lado direito */}
+  
       <div className={style.footerSide}>
         <div className={style.footerLinkContainer}>
           <a target="_blank" className={style.footerLink} style={{ cursor: "pointer" }} onClick={acessarInsta}><img src={instagram} alt="Instagram" className={style.iconsFooter} /></a>
-          <a target="_blank" className={style.footerLink} style={{ cursor: "pointer" }} href={`https://wa.me/${whatsappNumber}`}><img src={whatsapp} alt="Whatsapp" className={style.iconsFooter}/></a>
+          <a target="_blank" className={style.footerLink} style={{ cursor: "pointer" }} href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Olá, desejo tirar algumas dúvidas!")}`}><img src={whatsapp} alt="Whatsapp" className={style.iconsFooter}/></a>
         </div>
       </div>
     </footer>

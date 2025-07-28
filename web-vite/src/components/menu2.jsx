@@ -9,7 +9,7 @@ import search from "../assets/images/search.png";
 import Alert from "./alert";
 import ModalProfile from "./modalProfile";
 
-export const Menu2 = ({ onSearch }) => {
+export const Menu2 = ({ onSearch, option01 }) => {
   const navigate = useNavigate();
 
   const [showModal, setShowModal] = useState(false);
@@ -50,7 +50,7 @@ export const Menu2 = ({ onSearch }) => {
     <>
       <nav className={style.navBar}>
         <div className={style.navSide}>
-          <a href="/" className={style.navLink}>
+          <a href={`/${option01}`} className={style.navLink}>
             <img
               src={logoNav}
               alt="Logo"

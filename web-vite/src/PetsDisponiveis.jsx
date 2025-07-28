@@ -105,7 +105,7 @@ export default function PetsDisponiveis() {
   return (
     <>
 
-      <Menu2 onSearch={handleSearch} />
+      <Menu2 onSearch={handleSearch} option01="" />
 
       <section className={style.container}>
         {loading && <p>🔄 Carregando pets disponíveis...</p>}

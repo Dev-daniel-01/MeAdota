@@ -74,7 +74,7 @@ export default function InfoPets() {
 
         setMyPets(petsComEndereco);
       } catch (error) {
-        console.error("❌ Erro ao buscar seus pets:", error);
+        console.error("Erro ao buscar seus pets:", error);
       } finally {
         setLoading(false);
       }
@@ -94,7 +94,7 @@ export default function InfoPets() {
       setMyPets((prev) => prev.filter((p) => p.id !== petToDelete));
       setAlertMessage("🐾 Pet excluído com sucesso!");
     } catch (error) {
-      console.error("❌ Erro ao excluir pet:", error);
+      console.error("Erro ao excluir pet:", error);
       setAlertMessage("Erro ao excluir o pet. Tente novamente.");
     } finally {
       setConfirmVisible(false);
@@ -117,7 +117,6 @@ export default function InfoPets() {
       setAlertMessage("✅ Pet atualizado com sucesso!");
       setSelectedPet(null);
     } catch (error) {
-      console.error("❌ Erro ao atualizar pet:", error);
       setAlertMessage("❌ Erro ao atualizar o pet!");
     }
   };
@@ -142,7 +141,6 @@ export default function InfoPets() {
       setMyPets((prev) => [...prev, createdPet]);
       setAlertMessage("✅ Pet adicionado com sucesso!");
     } catch (error) {
-      console.error("❌ Erro ao adicionar pet:", error);
 
       if (error.response) {
         setAlertMessage(`Erro do servidor: ${error.response.data.message || "Verifique os campos enviados"}`);
@@ -154,7 +152,7 @@ export default function InfoPets() {
 
   return (
     <>
-      <Menu2 />
+      <Menu2 option01="petsDisponiveis"/>
 
       <section className={style.container}>
         {loading && <p>🔄 Carregando seus pets...</p>}
