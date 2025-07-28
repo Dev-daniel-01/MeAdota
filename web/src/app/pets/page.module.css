@@ -15,7 +15,8 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 7%;
+    gap: 4%;
+    padding: 2%;
     padding-top: 7%;
 }
 
@@ -95,7 +96,7 @@
         height: 150px;
     }
 .cardContent {
-     line-height: 0.3;
+     line-height: 0.8;
 }
 
 .location {
