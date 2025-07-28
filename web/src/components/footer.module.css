@@ -10,13 +10,14 @@
   align-items: center;
   padding: 0 1.5rem;
   color: aliceblue;
+  
 }
 
 .footerSide {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.8rem; /* ajusta o espaço entre os ícones */
+  gap: 0.8rem; 
 }
 
 .footerLinkContainer {
