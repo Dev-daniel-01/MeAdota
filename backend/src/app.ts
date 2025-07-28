@@ -10,7 +10,6 @@ app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
 app.use(cors())
 
-
 app.use(routes)
 
 export default app;

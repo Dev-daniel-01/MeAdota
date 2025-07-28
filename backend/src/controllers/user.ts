@@ -74,7 +74,6 @@ export default {
         const id = +req.params.id
         const data = req.body
 
-        // Atualizar a senha criptografada se enviada
         if (data.password) {
             data.password = await bcrypt.hash(data.password, 10)
         }
@@ -94,11 +93,8 @@ export default {
     delete: async (req: Request, res: Response) => {
         const id = +req.params.id
         try {
-            // Apaga todos os feedbacks do usuário
             await prisma.feedback.deleteMany({ where: { userId: id } })
-            // Apaga todos os pets do usuário
             await prisma.pet.deleteMany({ where: { userId: id } })
-            // Agora apaga o usuário
             await prisma.user.delete({ where: { id } })
 
             return res.status(200).json({ message: "Usuário deletado com sucesso." })

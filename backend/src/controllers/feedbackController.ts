@@ -24,7 +24,6 @@ export default {
     }
   },
 
-  // Listar todos feedbacks (opcional)
   read: async (req: Request, res: Response) => {
     const feedbacks = await prisma.feedback.findMany({
       include: {
@@ -35,7 +34,6 @@ export default {
     return res.status(200).json(feedbacks);
   },
 
-  // Listar feedbacks por pet
   readByPet: async (req: Request, res: Response) => {
     const petId = Number(req.params.petId);
     const feedbacks = await prisma.feedback.findMany({
@@ -45,7 +43,6 @@ export default {
     return res.status(200).json(feedbacks);
   },
 
-    // Deletar um feedback por ID
   delete: async (req: Request, res: Response) => {
     const id = Number(req.params.id);
 
