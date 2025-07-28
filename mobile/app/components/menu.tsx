@@ -37,7 +37,6 @@ export const Menu = () => {
           />
         )}
 
-        {/* Menu lateral aberto */}
         {open && (
           <>
             <Image
@@ -91,7 +90,7 @@ const styles = StyleSheet.create({
   topBar: {
     backgroundColor: '#6C087C',
     width: '100%',
-    height: '4%',
+    height: 60,
     paddingHorizontal: 16,
     paddingVertical: 10,
     flexDirection: 'row',

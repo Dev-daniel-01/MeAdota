@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, ImageBackground, Image, ScrollView, TouchableOpacity } from 'react-native'; // Adicione ImageBackground
 import { Menu } from '@/app/components/menu';
 import { Slider } from '@/app/components/slider';
+import { Footer } from '../components/footer';
 import { router } from 'expo-router';
 
 const images = [
@@ -17,9 +18,9 @@ export default function HomeScreen() {
   return (
     <ScrollView> 
     <ImageBackground
-      source={require("../../assets/images/fundo2.png")} // Imagem de fundo
+      source={require("../../assets/images/fundo2.png")} 
       style={styles.container}
-      resizeMode="cover" // Ou "contain", "stretch", "repeat"
+      resizeMode="cover" 
     >
     <View style={styles.sobMenu}></View>
          <Menu />
@@ -55,6 +56,7 @@ export default function HomeScreen() {
         <TouchableOpacity onPress={gotoExplore} style={styles.adocaoButton} activeOpacity={0.7}><Text style={styles.adocaoButtonText}>Ver pets Disponivéis</Text></TouchableOpacity>
     </View>
     </ImageBackground>
+    <Footer></Footer>
     </ScrollView>
   );
 }

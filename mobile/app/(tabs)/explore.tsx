@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Menu } from '@/app/components/menu';
-
+import { Footer } from '../components/footer';
 
 interface Pet {
   id: number;
@@ -100,6 +100,7 @@ export default function TabTwoScreen() {
           showsVerticalScrollIndicator={false}
         />
       </ImageBackground>
+      <Footer></Footer>
    </ScrollView>
   );
 }
