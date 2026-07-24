@@ -1,0 +1,169 @@
+
+
+.container{
+     background-image: url(../assets/images/fundo-next.png);
+     background-size: cover;
+     background-position: center;
+}
+
+.s1{
+    width: 100vw;
+    min-height: 100vh;
+    height: auto;
+}
+
+.s2{
+    width: 100vw;
+    min-height: 80vh;
+    height: auto;
+}
+
+.s3{
+    width: 100vw;
+    min-height: 60vh;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+.wrapAdocao{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8%;
+    flex-wrap: wrap;
+    margin-bottom: 0px; 
+}
+
+.containerAdocao{
+    color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0 2rem;
+    padding-bottom: 20px;
+}
+
+.adocaoButton{
+    width: 270px;
+    height: 50px;
+    background-color: #c48cdd;
+    color: aliceblue;
+    border-radius: 15px;
+    transition: all 200ms ease-in-out;
+    border: none;
+    font-size: 20px;
+    min-width: 80px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+    align-self: center;
+}
+.adocaoButton:hover{
+    background-color: #EE88BB;
+}
+
+.adocaoButton:active{
+    background-color: #EE88BB;
+}
+
+@media (max-width: 1200px) {
+
+.s1{
+    min-height: 60vh;
+}
+
+.adocaoImg{
+    width: 300px;
+    height: auto;
+}
+
+.adocaoButton{
+    font-size: 20px;
+
+}
+}
+
+
+
+@media (max-width: 800px) {
+
+.s1{
+    min-height: 20vh;
+}
+.s3{
+    width: 100vw;
+    min-height: 50vh;
+
+}
+
+.adocaoP{
+    font-size: 1rem;
+}
+.adocaoTitle{
+    font-size: 1.5rem;
+}
+
+.adocaoImg{
+    width: 240px;
+    height: auto;
+}
+
+.adocaoButton{
+    width: 230px;
+    height: 40px;
+    font-size: 16px;
+}
+
+
+}
+
+@media (max-width: 650px) {
+
+    .adocaoP{
+        font-size: 1rem;
+    }
+    .adocaoTitle{
+        font-size: 1.5rem;
+    }
+    .containerAdocao{
+        margin-right: 5%;
+        margin-left: 3%;
+    }
+    .adocaoImg{
+        width: 210px;
+        height: auto;
+    }
+    
+    .adocaoButton{
+        width: 220px;
+        height: 40px;
+        font-size: 16px;
+
+    }
+    
+
+    }
+    
+
+@media (max-width: 460px) {
+
+.s1{
+    min-height: 10vh;
+}
+.adocaoButton{
+    width: 150px;
+    height: 40px;
+    font-size: 14px;
+}
+
+.wrapAdocao{
+    gap: 40px;
+    height: 1;
+}
+.adocaoImg{
+    width: 120px;
+}
+    
+}
