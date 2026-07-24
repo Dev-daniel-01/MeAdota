@@ -1,0 +1,302 @@
+.sliderContainer {
+  width: 100%;  
+  height: auto;
+  overflow: hidden; 
+}
+
+.slide {
+  display: none;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.active {
+  display: block;
+}
+
+.card {
+  position: relative;
+  background: white;
+  border-radius: 10px;
+  padding: 1rem;
+  width: 50vw;
+  height: 40vh;       
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;         
+  overflow: hidden;
+}
+
+.parentDiv {
+  display: flex;
+  width: 100%;
+  min-height: 100%;
+  height: 100%;
+  gap: 1rem;
+}
+
+.leftDiv {
+  width: 60%;
+  min-height: 100%;
+  height: 100%;
+  display: flex;
+  background: #f1f1f1; 
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.rightDiv {
+  width: 40%;
+  min-height: 100%;
+  min-height: 100%;
+  background: #f1f1f1; 
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+/* ===== Conteúdo interno ===== */
+.wrapUser {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  overflow: hidden;
+}
+
+.wrapUser img{
+  width: 30px;
+  height: auto;
+}
+
+.wrapUser h5 {
+  font-size: 1.2rem;
+  opacity: 0.7;
+}
+
+.wrapImage {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.petImage {
+  width: auto;
+  height: 250px;
+  max-height: 90%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.petName {
+  font-size: 1.2rem;
+  color: rgb(0, 0, 0);
+  text-align: start;
+  font-weight: 800;
+  overflow: hidden;
+}
+
+.wrapTexts {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.text {
+  text-align: center;
+  opacity: 0.8;
+  font-size: 30px;
+}
+
+  .adopted {
+    position: absolute;
+    top: 10px;         
+    background: green;   
+    color: #fff;
+    font-weight: bold;
+    font-size: 0.9rem;
+    padding: 1rem;
+    width: 97%;
+    text-align: center;
+    border-radius: 20px;   
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    letter-spacing: 0.5px;
+  }
+
+@media (max-width: 1310px){
+  .parentDiv {
+    flex-direction: column;
+  }
+  .card {
+    width: 50vw;
+    height: 70vh;       
+  }
+  .leftDiv {
+    width: 100%;
+    min-height: 60%;
+  }
+  
+  .rightDiv {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 100px;
+    overflow-y: hidden;
+    justify-content: center;
+    align-content: center;
+    display: flex;
+  }
+  .wrapTexts {
+    min-height: 220px;
+    height: 100%;
+  }
+  .text {
+    text-align: center;
+    opacity: 0.8;
+    font-size: 20px;
+    padding-top: 2rem;
+  }
+}
+
+@media (max-width: 840px){
+  .parentDiv {
+    flex-direction: row;
+  }
+  .card {
+    width: 80vw;
+    height: 40vh;       
+  }
+  .leftDiv {
+    width: 60%;
+    min-height: 60%;
+  }
+  
+  .rightDiv {
+    width: 40%;
+    min-height: 60%;
+    background: #f1f1f1; 
+    padding: 1rem;
+    border-radius: 8px;
+  }
+  .wrapTexts {
+    min-height: 100%;
+    height: 100%;
+
+  }
+  .text {
+    text-align: center;
+    font-size: 17px;
+  }
+  
+.petName {
+  font-size: 1rem;
+  color: rgb(0, 0, 0);
+  text-align: start;
+  font-weight: 800;
+}
+.wrapUser h5 {
+  font-size: 1rem;
+  opacity: 0.7;
+}
+
+.adopted {
+  font-size: 0.9rem;
+  padding: 0.5rem;
+  width: 97%;
+}
+
+}
+
+@media (max-width: 600px){
+  .card {
+    width: 90vw;
+    height: 40vh;       
+  }
+  .leftDiv {
+    width: 60%;
+    min-height: 60%;
+  }
+  
+  .rightDiv {
+    width: 40%;
+    min-height: 60%;
+    background: #f1f1f1; 
+    padding: 1rem;
+    border-radius: 8px;
+  }
+  .wrapTexts {
+    min-height: 100%;
+    height: 100%;
+  }
+  .text {
+    text-align: center;
+    font-size: 17px;
+  }
+  
+.petName {
+  font-size: 1rem;
+  color: rgb(0, 0, 0);
+  text-align: start;
+  font-weight: 800;
+}
+.wrapUser h5 {
+  font-size: 1rem;
+  opacity: 0.7;
+}
+
+.wrapUser img{
+  width: 25px;
+  height: auto;
+}
+
+}
+
+@media (max-width: 400px){
+  .card {
+    width: 90vw;
+    height: 35vh;       
+  }
+  .leftDiv {
+    width: 60%;
+    min-height: 60%;
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+  
+  .rightDiv {
+    width: 40%;
+    min-height: 60%;
+    background: #f1f1f1; 
+    padding: 0.5rem;
+    border-radius: 8px;
+  }
+  .wrapTexts {
+    min-height: 100%;
+    height: 100%;
+  }
+  .text {
+    text-align: center;
+    font-size: 12px;
+  }
+  
+.petName {
+  font-size: 0.7rem;
+}
+.wrapUser h5 {
+  font-size: 0.7rem;
+}
+
+.wrapUser img{
+  width: 25px;
+  height: auto;
+}
+}
+
+@media (max-width: 376px) and (max-height:668px){
+  .card {
+    width: 90vw;
+    height: 50vh;       
+  }
+ 
+}
