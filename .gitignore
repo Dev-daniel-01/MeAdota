@@ -1,0 +1,22 @@
+# Dependências
+**/node_modules/
+**/.expo/
+
+# Envs
+**/.env
+**/.env.local
+**/.env.production
+**/.env.*.local
+
+# Builds
+**/dist/
+**/build/
+**/.next/
+**/generated/
+
+# Bancos de dados locais
+**/*.db
+
+# Sistemas
+.DS_Store
+Thumbs.db
