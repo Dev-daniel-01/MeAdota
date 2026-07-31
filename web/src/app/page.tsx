@@ -20,9 +20,19 @@ export default function Home() {
     <Menu/>
     <section className={styles.container}>
         <section className={styles.s1}>
-        
-        <Slider></Slider>
-      </section>
+          <div className={styles.heroWrap}>
+            <Slider></Slider>
+            <div className={styles.heroContent}>
+              <h1 className={styles.heroTitle}>Encontre seu novo melhor amigo</h1>
+              <p className={styles.heroSubtitle}>
+                Dezenas de pets esperando por um lar cheio de amor. Adote com responsabilidade e mude uma vida.
+              </p>
+              <button className={styles.heroButton} onClick={() => router.push('/pets')}>
+                Ver pets para adoção
+              </button>
+            </div>
+          </div>
+        </section>
       <section className={styles.s2}>
                 <CardsSection></CardsSection>
       </section>

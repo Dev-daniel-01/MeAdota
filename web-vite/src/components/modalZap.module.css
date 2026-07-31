@@ -1,81 +1,87 @@
 .modalOverlay {
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(27, 11, 46, 0.55);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
   backdrop-filter: blur(4px);
+  padding: 1rem;
 }
 
 .modalContainer {
   position: relative;
-  background-color: white;
+  background: var(--surface);
   padding: 2rem;
-  border-radius: 8px;
+  border-radius: var(--radius-xl);
   width: 90%;
   max-width: 400px;
-   box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  box-shadow: var(--shadow-lg);
   animation: fadeIn 0.3s ease-in-out;
 }
 
- @keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.95); }
-    to { opacity: 1; transform: scale(1); }
-  }
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
 
-
-.borders{
-  border-top: 1px solid black;
+.borders {
+  border-top: 1.5px solid var(--line);
   padding-top: 1rem;
-  border-bottom: 1px solid black;
+  border-bottom: 1.5px solid var(--line);
   padding-bottom: 1rem;
 }
 
 .closeButton {
   position: absolute;
-  top: 2px;
-  right: 8px;
+  top: 12px;
+  right: 14px;
   background: none;
   border: none;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   cursor: pointer;
-  color: black;
-  transition: all 200ms ease-in-out;
+  color: var(--muted);
+  transition: color var(--transition);
 }
 
-.closeButton:hover{
-  color: red;
+.closeButton:hover {
+  color: var(--danger);
 }
 
 .modalTitle {
   text-align: center;
-  color: #333;
+  color: var(--purple-900);
+  font-family: var(--font-display);
   margin-bottom: 1.5rem;
-  font-size: 1.3rem;
+  font-size: 1.35rem;
 }
 
 .formGroup {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
 }
 
 .formGroup label {
   display: block;
   margin-bottom: 0.5rem;
-  font-weight: 500;
-  color: #333;
+  font-weight: 600;
+  color: var(--ink);
 }
 
 .formGroup input,
 .formGroup textarea {
   width: 100%;
-  padding: 0.6rem;
-  border: 1px solid #ddd;
-  border-radius: 10px;
+  padding: 0.75rem;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-md);
   font-size: 1rem;
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
- 
+  outline: none;
+  transition: border-color var(--transition);
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus {
+  border-color: var(--purple-500);
 }
 
 .formGroup textarea {
@@ -85,31 +91,33 @@
 
 .sendButton {
   width: 100%;
-  padding: 0.7rem;
-  background-color: #487C08;
+  padding: 0.8rem;
+  background: var(--success);
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   font-size: 1rem;
-  font-weight: bold;
+  font-weight: 700;
   cursor: pointer;
-  transition: background-color 0.3s;
-  margin-top: 1rem;
+  transition: transform var(--transition), box-shadow var(--transition);
+  margin-top: 0.5rem;
+  box-shadow: var(--shadow-sm);
 }
 
 .sendButton:hover {
-  background-color: #128C7E;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .contactInfo {
   margin-top: 1rem;
   font-size: 0.9rem;
   text-align: center;
-  color: #555;
+  color: var(--muted);
 }
 
 .errorMessage {
-  color: #e74c3c;
+  color: var(--danger);
   text-align: center;
   padding: 1rem;
 }

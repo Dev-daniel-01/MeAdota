@@ -5,11 +5,14 @@ import {
   View,
   FlatList,
   Image,
-  ImageBackground, ScrollView
+  TouchableOpacity,
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { Menu } from '@/app/components/menu';
 import { Footer } from '../components/footer';
+import ZapModal from '../components/ZapModal';
+import { useAuth } from '../context/AuthContext';
+import { router } from 'expo-router';
+import { API_BASE_URL } from '../api/api';
 
 interface Pet {
   id: number;
@@ -20,6 +23,7 @@ interface Pet {
   user: {
     name: string;
     cep: string;
+    telephone?: string;
   };
 }
 
@@ -28,12 +32,14 @@ interface PetComEndereco extends Pet {
 }
 
 export default function TabTwoScreen() {
+  const { user } = useAuth();
   const [animais, setAnimais] = useState<PetComEndereco[]>([]);
+  const [selectedPet, setSelectedPet] = useState<PetComEndereco | null>(null);
 
   useEffect(() => {
     const fetchAnimais = async () => {
       try {
-        const res = await fetch('http://localhost:5555/pets');
+        const res = await fetch(`${API_BASE_URL}/pets`);
         const data = await res.json();
         const disponiveis: Pet[] = data.filter((pet: Pet) => pet.available);
 
@@ -66,6 +72,14 @@ export default function TabTwoScreen() {
     fetchAnimais();
   }, []);
 
+  const handleAdopt = (pet: PetComEndereco) => {
+    if (!user) {
+      router.push('/login');
+      return;
+    }
+    setSelectedPet(pet);
+  };
+
   const renderPet = ({ item }: { item: PetComEndereco }) => (
     <View style={styles.card}>
       <Image
@@ -77,81 +91,94 @@ export default function TabTwoScreen() {
         <Text style={styles.ownerName}>{item.user.name}</Text>
         <Text style={styles.petName}>{item.name}</Text>
         <Text style={styles.location}>{item.enderecoFormatado}</Text>
+        <TouchableOpacity style={styles.adoptButton} onPress={() => handleAdopt(item)} activeOpacity={0.85}>
+          <Text style={styles.adoptButtonText}>Quero Adotar</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
 
   return (
-    <ScrollView> 
-      <ImageBackground
-        source={require('../../assets/images/fundo2.png')}
-        style={styles.container}
-        resizeMode="cover"
-      >
-        <Menu />
+    <View style={styles.screen}>
+      <Menu />
 
-        <FlatList
-          data={animais}
-          renderItem={renderPet}
-          keyExtractor={(item) => item.id.toString()}
-          numColumns={2}
-          columnWrapperStyle={styles.row}
-          contentContainerStyle={styles.listContent}
-          showsVerticalScrollIndicator={false}
-        />
-      </ImageBackground>
-      <Footer></Footer>
-   </ScrollView>
+      <FlatList
+        data={animais}
+        renderItem={renderPet}
+        keyExtractor={(item) => item.id.toString()}
+        numColumns={2}
+        columnWrapperStyle={styles.row}
+        contentContainerStyle={styles.listContent}
+        showsVerticalScrollIndicator={false}
+        ListFooterComponent={<Footer />}
+      />
+
+      <ZapModal
+        visible={!!selectedPet}
+        onClose={() => setSelectedPet(null)}
+        tutorName={selectedPet?.user.name ?? 'Tutor'}
+        tutorPhone={selectedPet?.user.telephone}
+      />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-    container: {
-    width: "100%",
-    minHeight: "100%",
-    height: 'auto',
-    display: 'flex',
-    flexDirection: 'column',
-    backgroundImage: require("../../assets/images/fundo2.png")
+  screen: {
+    flex: 1,
+    backgroundColor: '#F6F2FA',
   },
   listContent: {
-    paddingTop: 100, 
-    paddingHorizontal: 20,
+    paddingTop: 76,
+    paddingHorizontal: 16,
   },
   row: {
     justifyContent: 'space-between',
-    marginBottom: 20,
+    marginBottom: 16,
   },
   card: {
     backgroundColor: '#fff',
     width: '48%',
-    borderRadius: 12,
+    borderRadius: 14,
     overflow: 'hidden',
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 4,
-    marginBottom: 15
+    borderWidth: 1,
+    borderColor: '#DDD2E6',
+    marginBottom: 15,
   },
   image: {
     width: '100%',
     aspectRatio: 1.3,
   },
   cardContent: {
-    padding: 10,
+    padding: 12,
   },
   ownerName: {
-    color: '#C36C09',
-    fontWeight: '400',
+    color: '#7C3AED',
+    fontWeight: '600',
+    fontSize: 11,
+    textTransform: 'uppercase',
   },
   petName: {
-    fontWeight: 'bold',
+    fontWeight: '700',
     fontSize: 16,
+    color: '#221A2E',
     marginTop: 2,
   },
   location: {
     fontSize: 12,
-    color: '#444',
+    color: '#564D61',
     marginTop: 4,
+    marginBottom: 10,
+  },
+  adoptButton: {
+    backgroundColor: '#2E9B5B',
+    borderRadius: 8,
+    paddingVertical: 9,
+    alignItems: 'center',
+  },
+  adoptButtonText: {
+    color: '#fff',
+    fontWeight: '700',
+    fontSize: 12,
   },
 });

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ImageBackground, Image, ScrollView, TouchableOpacity } from 'react-native'; // Adicione ImageBackground
+import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
 import { Menu } from '@/app/components/menu';
 import { Slider } from '@/app/components/slider';
 import { Footer } from '../components/footer';
@@ -12,23 +12,28 @@ const images = [
   { id: 5, image: require('../../assets/images/slider5.png') },
 ];
 
- const gotoExplore = () => router.push('/(tabs)/explore');
+const gotoExplore = () => router.push('/(tabs)/explore');
 
 export default function HomeScreen() {
   return (
-    <ScrollView> 
-    <ImageBackground
-      source={require("../../assets/images/fundo2.png")} 
-      style={styles.container}
-      resizeMode="cover" 
-    >
-    <View style={styles.sobMenu}></View>
-         <Menu />
+    <ScrollView style={styles.container}>
+      <Menu />
 
-       <View style={{ marginTop: '8%' }}>
-  <Slider images={images} />
-</View>
-    <View style={styles.cardsContainer}>
+      <View style={styles.heroWrap}>
+        <Slider images={images} />
+        <View style={styles.heroOverlay} pointerEvents="none" />
+        <View style={styles.heroContent} pointerEvents="box-none">
+          <Text style={styles.heroTitle}>Encontre seu novo melhor amigo</Text>
+          <Text style={styles.heroSubtitle}>
+            Dezenas de pets esperando por um lar cheio de amor.
+          </Text>
+          <TouchableOpacity onPress={gotoExplore} style={styles.heroButton} activeOpacity={0.8}>
+            <Text style={styles.heroButtonText}>Ver pets para adoção</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+
+      <View style={styles.cardsContainer}>
         <View style={styles.cardsWrap}>
           <Image style={styles.cardsIcons} source={require("../../assets/images/iconCards1.png")}></Image>
           <Image style={styles.cardsText} source={require("../../assets/images/textCards1.png")}></Image>
@@ -45,18 +50,17 @@ export default function HomeScreen() {
           <Image style={styles.cardsIcons} source={require("../../assets/images/iconCards4.png")}></Image>
           <Image style={styles.cardsText} source={require("../../assets/images/textCards4.png")}></Image>
         </View>
-    </View>
-    <View style={styles.adocaoContainer}>
+      </View>
+      <View style={styles.adocaoContainer}>
         <Text style={styles.adocaoTitulo}>Pronto para Mudar uma Vida?</Text>
         <Text style={styles.adocaoText}>Explore nossa galeria de pets incríveis e encontre o companheiro perfeito para sua família.</Text>
-          <View style={styles.adocaoWrapImgs}>
-              <Image style={styles.adocaoImg} source={require("../../assets/images/adocaoCachorro.png")}></Image>
-              <Image style={styles.adocaoImg} source={require("../../assets/images/adocaoGato.png")}></Image>
-          </View>
+        <View style={styles.adocaoWrapImgs}>
+          <Image style={styles.adocaoImg} source={require("../../assets/images/adocaoCachorro.png")}></Image>
+          <Image style={styles.adocaoImg} source={require("../../assets/images/adocaoGato.png")}></Image>
+        </View>
         <TouchableOpacity onPress={gotoExplore} style={styles.adocaoButton} activeOpacity={0.7}><Text style={styles.adocaoButtonText}>Ver pets Disponivéis</Text></TouchableOpacity>
-    </View>
-    </ImageBackground>
-    <Footer></Footer>
+      </View>
+      <Footer></Footer>
     </ScrollView>
   );
 }
@@ -66,34 +70,61 @@ const styles = StyleSheet.create({
     width: "100%",
     minHeight: "100%",
     height: 'auto',
-    display: 'flex',
-    flexDirection: 'column',
-    backgroundImage: require("../../assets/images/fundo2.png")
+    backgroundColor: '#FFFFFF',
   },
-  slider:{
-    paddingTop: '17%',
+  heroWrap: {
+    marginTop: 60,
+    position: 'relative',
   },
-  sobMenu: {
-    width: '100%',
-    height: '8%',
-    backgroundColor: '#6C087C',
-    zIndex: 1,
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-     position: 'fixed',
-    top: 0,
-    left: 0
+  heroOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(20, 10, 30, 0.42)',
+  },
+  heroContent: {
+    ...StyleSheet.absoluteFillObject,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 24,
+  },
+  heroTitle: {
+    color: '#FFFFFF',
+    fontSize: 26,
+    fontWeight: '700',
+    textAlign: 'center',
+  },
+  heroSubtitle: {
+    color: 'rgba(255,255,255,0.92)',
+    fontSize: 14,
+    textAlign: 'center',
+    marginTop: 10,
+    lineHeight: 20,
+  },
+  heroButton: {
+    backgroundColor: '#FFFFFF',
+    paddingVertical: 12,
+    paddingHorizontal: 26,
+    borderRadius: 999,
+    marginTop: 22,
+  },
+  heroButtonText: {
+    color: '#55187A',
+    fontSize: 14,
+    fontWeight: '700',
   },
   cardsContainer: {
     display: 'flex',
     paddingLeft: '5%',
     justifyContent: 'center',
     flexDirection: 'column',
-    marginTop: '8%'
+    marginTop: '8%',
+    backgroundColor: '#F6F2FA',
+    paddingTop: '8%',
+    paddingBottom: '4%',
   },
   cardsWrap: {
     display: 'flex',
     flexDirection: 'row',
+    alignItems: 'center',
     gap: '15%',
     marginBottom: '10%'
   },
@@ -108,11 +139,12 @@ const styles = StyleSheet.create({
   adocaoContainer: {
     display: 'flex',
     flexDirection: 'column',
-    color: 'white'
+    backgroundColor: '#FFFFFF',
   },
   adocaoTitulo: {
     fontSize: 24,
-    color: 'white',
+    fontWeight: '700',
+    color: '#221A2E',
     textAlign: 'center',
     paddingBottom: '5%',
     paddingTop: '6%'
@@ -120,7 +152,8 @@ const styles = StyleSheet.create({
   adocaoText: {
       fontSize: 15,
       textAlign: 'center',
-      color: 'white',
+      color: '#564D61',
+      paddingHorizontal: '8%',
       paddingBottom: '7%',
   },
   adocaoWrapImgs: {
@@ -133,33 +166,32 @@ const styles = StyleSheet.create({
   },
   adocaoImg: {
     width: 148,
-    height: 140
+    height: 140,
+    borderRadius: 18,
   },
  adocaoButton: {
-    backgroundColor: '#C9A0DC',
-    paddingVertical: 12,
+    backgroundColor: '#6D28D9',
+    paddingVertical: 14,
     paddingHorizontal: 27,
-    borderRadius: 15, 
-    alignSelf: 'center', 
+    borderRadius: 999,
+    alignSelf: 'center',
     marginBottom: '20%',
     marginTop: 10,
-    shadowColor: '#000',
+    shadowColor: '#221A2E',
     shadowOffset: {
       width: 0,
       height: 4,
     },
-    shadowOpacity: 0.3,
-    shadowRadius: 4.65,
-    elevation: 8, 
-    borderWidth: 2,
-    borderColor: '#FFFFFF', 
-    minWidth: 250, 
+    shadowOpacity: 0.15,
+    shadowRadius: 8,
+    elevation: 6,
+    minWidth: 250,
     justifyContent: 'center',
     alignItems: 'center',
   },
   adocaoButtonText: {
     color: 'white',
-    fontSize: 12,
+    fontSize: 13,
     fontWeight: 'bold',
     textTransform: 'uppercase',
     letterSpacing: 1,

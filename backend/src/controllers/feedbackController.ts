@@ -7,7 +7,6 @@ export default {
   // Criar novo feedback
   create: async (req: Request, res: Response) => {
     const { comment, rating, userId, petId, image } = req.body;
-
     try {
       const feedback = await prisma.feedback.create({
         data: {

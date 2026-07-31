@@ -2,39 +2,41 @@
   min-height: 100vh;
   width: 100vw;
   height: auto;
-  background-image: url("../src/assets/images/BackgroundAdocao.png");
-  background-position: center;
-  background-size: cover;
-  padding: 2rem 0;
+  background: var(--surface-alt);
+  padding: 6rem 0 3rem;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
-
   align-items: center;
 }
 
 .cardsFlex {
-
-  margin-top: 2rem;
+  margin-top: 1rem;
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
   justify-content: center;
   padding: 2rem;
-  flex-wrap: wrap;
 }
 
 .card {
-  width: 100%;         /* ocupa toda a largura do container */
-  max-width: 700px;    /* nunca passa de 700px */
-  min-width: 280px;    /* define uma largura mínima para não ficar muito pequeno */
-  background-color: white;
-  border-radius: 16px;
+  width: 100%;
+  max-width: 700px;
+  min-width: 280px;
+  background-color: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-sm);
   display: flex;
-  flex-direction: column; 
-  margin: 0 auto;        
+  flex-direction: column;
+  margin: 0 auto;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
 }
 
 .cardImage {
@@ -47,19 +49,22 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 16px 0px 0px 16px;
 }
 
 .ownerName {
   position: absolute;
-  bottom: 10px;
-  left: 10px;
-  background: rgba(255, 255, 255, 0.8);
-  padding: 5px 10px;
-  border-radius: 5px;
+  bottom: 12px;
+  left: 12px;
+  background: rgba(255, 255, 255, 0.92);
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink);
+  box-shadow: var(--shadow-sm);
 }
 
 .cardContent {
@@ -71,17 +76,19 @@
 }
 
 .petName {
-  font-size: 2rem;
-  color: #333;
+  font-size: 1.7rem;
+  font-family: var(--font-display);
+  color: var(--ink);
   display: flex;
   align-items: center;
-  gap: 2rem;
-  margin-bottom: 1rem;
-  border-bottom: 1px solid black;
+  gap: 0.9rem;
+  margin-bottom: 0.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--line);
 }
 
 .iconName {
-  width: 30px;
+  width: 26px;
   height: auto;
 }
 
@@ -89,13 +96,14 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 1rem;
+  font-size: 0.95rem;
+  color: var(--ink);
 }
 
 .containerInfos {
   display: flex;
   gap: 1rem;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid var(--line);
   padding-bottom: 1rem;
   flex-wrap: wrap;
 }
@@ -103,9 +111,10 @@
 .descriptionSection {
   display: flex;
   gap: 10px;
-  margin: 1rem 0;
-  border-bottom: 1px solid black;
+  margin: 0.25rem 0;
+  border-bottom: 1px solid var(--line);
   padding-bottom: 1rem;
+  color: var(--muted);
 }
 
 .descriptionSection p {
@@ -117,84 +126,87 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  color: var(--muted);
+  font-size: 0.92rem;
 }
 
 .icon {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
 }
 
-/* ✅ Botões de ação */
 .buttonsRow {
   display: flex;
   justify-content: space-between;
   gap: 10px;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 
 .editButton {
-  background-color: #004494;
+  background: var(--info);
   color: white;
   border: none;
   padding: 0.8rem 1.2rem;
-  font-size: 1rem;
-  font-weight: 800;
-  border-radius: 5px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
+  transition: background var(--transition), transform var(--transition);
   flex: 1;
 }
 
 .editButton:hover {
-  background-color: #0363d2;
+  background: var(--info-dark);
+  transform: translateY(-1px);
 }
 
 .deleteButton {
-  background-color: #a30000;
+  background: var(--danger);
   color: white;
   border: none;
   padding: 0.8rem 1.2rem;
-  font-size: 1rem;
-  font-weight: 800;
-  border-radius: 5px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
+  transition: background var(--transition), transform var(--transition);
   flex: 1;
 }
 
 .deleteButton:hover {
-  background-color: #d91a1a;
+  background: var(--danger-dark);
+  transform: translateY(-1px);
 }
 
-.buttonAddPet{
-    width: 300px;
-    height: 4vh;
-    border-radius: 15px;
-    background-color: #C9A0DC;
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: all 200ms ease-in-out;
+.buttonAddPet {
+  width: 300px;
+  max-width: 90vw;
+  padding: 0.9rem 0;
+  border-radius: var(--radius-pill);
+  background: var(--purple-600);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: var(--shadow-sm);
+  transition: background var(--transition), transform var(--transition);
+  margin-top: 1rem;
 }
 
-.buttonAddPet:hover{
-    background-color: #ee88bba9;
-}
-
-.buttonAddPet:active{
-  background-color: #ee88bba9;
+.buttonAddPet:hover {
+  background: var(--purple-700);
+  transform: translateY(-1px);
 }
 
 .centerButtonContainer {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 60vh;
 }
 
-
-/* ✅ Responsivo */
+/* Responsivo */
 @media (max-width: 900px) {
   .card {
     flex-direction: column;
@@ -204,10 +216,6 @@
     width: 100%;
   }
 
-  .image {
-    border-radius: 16px 16px 0 0;
-  }
-
   .cardContent {
     width: 100%;
   }
@@ -215,24 +223,25 @@
 
 @media (min-width: 768px) {
   .card {
-    flex-direction: row;  /* lado a lado */
+    flex-direction: row;
   }
+
   .cardImage {
-    width: 40%; /* por exemplo */
+    width: 40%;
   }
+
   .cardContent {
     width: 60%;
   }
 }
 
-
-/* Para telas muito pequenas, garante que o conteúdo não ultrapasse */
 @media (max-width: 400px) {
   .card {
-    min-width: auto; /* pode tirar o min-width para melhor fluidez */
+    min-width: auto;
     padding: 0px;
   }
-  .cardContent{
-    gap: 0px;
+
+  .cardContent {
+    gap: 0.5rem;
   }
 }

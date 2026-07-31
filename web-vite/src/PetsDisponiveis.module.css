@@ -1,129 +1,135 @@
-.container{
-    width: 100%;
-    min-height: 100vh;
-    height: auto;
-    background-image: url('../src/assets/images/BackgroundPage2.png');
-    background-position: center;
-    background-size: cover;
+.container {
+  width: 100%;
+  min-height: 100vh;
+  height: auto;
+  background: var(--surface-alt);
 }
 
-.cardsFlex{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 3%;
-    padding: 1rem;
-     padding-top: 5rem;
-    justify-content: center;
-    align-items: center;
-    width: 100vw;
-    min-height: 70vh;
-    height: auto;
+.cardsFlex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.75rem;
+  padding: 2rem;
+  padding-top: 6rem;
+  justify-content: center;
+  align-items: stretch;
+  width: 100vw;
+  min-height: 70vh;
+  height: auto;
 }
 
 .card {
-    background-color: #EFEFEF;
-    width: 300px;
-    height: 380px;
-    margin-bottom: 5%;
-    border-radius: 16px;
-    border: 1px solid #BEBEBE;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  width: 260px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
 }
 
 .image {
-    border-radius: 16px 16px 0 0;
-    width: 100%;
-    height: 70%;
-      object-fit: cover;
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
 }
 
 .cardContent {
-    display: flex;
-    flex-direction: column;
-    padding-top: 5%;
-    padding-left: 2%;
-     line-height: 1.7rem;
-  
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 1rem 1.1rem 1.25rem;
 }
 
 .ownerName {
-    color: #C36C09;
-    font-weight: 500;
+  color: var(--purple-500);
+  font-weight: 600;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
 
 .petName {
-    color: black;
-    font-size: 16px;
-    font-weight: 700;
+  color: var(--ink);
+  font-size: 1.15rem;
+  font-family: var(--font-display);
+  font-weight: 700;
 }
 
 .location {
-    color: #000000;
-    opacity: 0.7;
-    font-weight: 700;
+  color: var(--muted);
+  font-weight: 500;
+  font-size: 0.88rem;
 }
 
-.button{
-    width: 35%;
-    height: 4rem;
-    align-items: center;
-    border-radius: 8px;
-    background-color: #D7ACEB;
-    color: #000000;
-    font-size: 1.2rem;
-    cursor: pointer;
-    margin-bottom: 1rem;
-    transition: all 200ms ease-in-out;
+.button {
+  padding: 1rem 3rem;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: var(--purple-600);
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow-sm);
+  transition: background var(--transition), transform var(--transition);
 }
 
-.button:hover{
-    background-color: #8345a0;
-    color: #ffffff;
+.button:hover {
+  background: var(--purple-700);
+  transform: translateY(-1px);
 }
 
-.wrapButton{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100vw;
-    height: auto;
-
-}
-@media (max-width: 1000px){
-    
-.cardsFlex {
-      padding-top: 10%;
-}
+.wrapButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: auto;
 }
 
-@media (max-width: 700px){
-    
-.cardsFlex {
+@media (max-width: 700px) {
+  .cardsFlex {
     padding: 0.5rem;
-      padding-top: 20%;
-}
-}
-
-@media (max-width: 650px){
-    .card {
-    width: 200px;
-    height: 300px;
-    }
+    padding-top: 6rem;
+    gap: 1.25rem;
+  }
 }
 
-@media (max-width: 430px){
-    .card {
-    width: 170px;
-    height: 270px;
+@media (max-width: 650px) {
+  .card {
+    width: 190px;
+  }
+
+  .image {
+    height: 140px;
+  }
 }
 
-.cardContent {
-     line-height: 1.3rem;
-}
+@media (max-width: 430px) {
+  .card {
+    width: 160px;
+  }
 
-.location {
-    font-size: 0.8rem;
-    color: #000000;
-    opacity: 0.7;
-    font-weight: 700;
-}
+  .image {
+    height: 120px;
+  }
+
+  .cardContent {
+    padding: 0.75rem 0.85rem 1rem;
+  }
+
+  .petName {
+    font-size: 0.98rem;
+  }
+
+  .location {
+    font-size: 0.78rem;
+  }
 }

@@ -1,6 +1,6 @@
 import styles from "./menu.module.css"
 import Image from "next/image";
-import logoNav from "../assets/images/logo.png";
+import logoNav from "../assets/images/Logo.png";
 import pataNav from "../assets/images/Pata.png";
 
 export const Menu = () => {

@@ -1,12 +1,13 @@
 .container {
   display: flex;
   height: 100vh;
-  background: #fff;
+  background: var(--bg);
 }
 
 .imageSide {
   flex: 1;
-  background: #f3f3f3;
+  position: relative;
+  background: var(--surface-alt);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,24 +21,24 @@
 
 .formSide {
   flex: 1;
-  background: #fff url('../src/assets/images/fundoLogin2.png') no-repeat center;
-  background-size: contain;
+  background: var(--surface);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 2rem;
+  overflow-y: auto;
 }
 
 .formBox {
-  width: 55%;
-  background: #fff;
-  padding: 2rem;
-  border-radius: 15px;
-  box-shadow: 12px 16px 30px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  max-width: 400px;
+  background: var(--surface);
+  padding: 1rem;
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin: 2rem 0;
 }
 
 .wrapSideformBox {
@@ -45,145 +46,138 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.75rem;
 }
 
 .logo {
-  width: 80px;
-  margin-bottom: 0.5rem;
+  width: 64px;
+  margin-bottom: 0.75rem;
 }
 
 .title {
-  font-size: 3rem;
+  font-size: 2.3rem;
+  font-weight: 700;
   text-align: center;
-  margin-top: 0.5rem;
-  color: #000;
-  position: static; 
-  transform: none;
+  margin-top: 0.25rem;
+  color: var(--ink);
 }
 
 .inputGroup {
   position: relative;
-  margin-bottom: 1rem;
+  margin-bottom: 0.9rem;
   width: 100%;
 }
 
 .inputGroup input {
   width: 100%;
-  padding: 0.8rem 0.8rem 0.8rem 3rem; 
-  height: 45px;
-  border: none;
-  border-radius: 8px;
-  background: #6C087C;
-  color: #fff;
-  font-size: 1rem;
+  padding: 0.8rem 2.6rem 0.8rem 2.6rem;
+  height: 48px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--surface-alt);
+  color: var(--ink);
+  font-size: 0.98rem;
+  transition: border-color var(--transition), background var(--transition);
+}
+
+.inputGroup input:focus {
+  outline: none;
+  border-color: var(--purple-400);
+  background: var(--surface);
 }
 
 .inputGroup .inputIcon {
   position: absolute;
   top: 50%;
-  left: 10px;
+  left: 14px;
   transform: translateY(-50%);
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   pointer-events: none;
+  filter: brightness(0) saturate(100%);
+  opacity: 0.45;
 }
 
 .inputGroup input::placeholder {
-  font-size: 1rem;
-  color: #fff;
+  font-size: 0.92rem;
+  color: var(--muted-light);
 }
 
 .eyeIcon {
   position: absolute;
   top: 50%;
-  right: 12px;
+  right: 14px;
   transform: translateY(-50%);
   width: 20px;
   height: 20px;
   cursor: pointer;
-  opacity: 0.8;
-  transition: 0.2s;
+  filter: brightness(0) saturate(100%);
+  opacity: 0.55;
+  transition: opacity var(--transition);
 }
 
 .eyeIcon:hover {
-  opacity: 1;
+  opacity: 0.9;
 }
 
 .submitButton {
   width: 100%;
-  height: 45px;
-  background: #6b1c84;
+  height: 48px;
+  background: var(--purple-600);
   color: #fff;
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 1rem;
   border: none;
-  border-radius: 8px;
-  margin-top: 1rem;
+  border-radius: var(--radius-md);
+  margin-top: 0.6rem;
   cursor: pointer;
-  transition: 0.3s;
+  transition: background var(--transition), transform var(--transition);
 }
 
 .submitButton:hover {
-  background: #541668;
+  background: var(--purple-700);
+  transform: translateY(-1px);
 }
 
 .backButton {
   margin-top: 1rem;
   background: none;
   border: none;
-  color: #000;
-  font-size: 1.5rem;
+  color: var(--muted);
+  font-size: 0.95rem;
   cursor: pointer;
   text-decoration: underline;
+}
+
+.backButton:hover {
+  color: var(--purple-600);
 }
 
 .feedback {
   margin-top: 0.5rem;
   font-size: 0.9rem;
-  color: #d00; 
+  color: var(--danger);
 }
 
 @media (max-width: 1380px) {
   .imageSide {
     display: none;
   }
-  .formSide {
-    background: #fff url('../src/assets/images/fundoLogin.png') no-repeat center;
-    background-size: cover;
-    padding: 1rem;
-  }
+
   .formBox {
-    width: 65%;
+    width: 100%;
+    max-width: 440px;
   }
 }
 
 @media (max-width: 670px) {
-  .formBox {
-    width: 90%;
-    min-height: 50%;
-    padding: 2rem;
-  }
   .title {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
 }
 
 @media (max-width: 520px) {
-  .formBox {
-    width: 90%;
-    min-height: 55%;
-  }
   .title {
-    font-size: 2.2rem;
-  }
-}
-
-@media (max-width: 376px) and (max-height: 668px) {
-  .formBox {
-    width: 90%;
-    min-height: 65%;
-  }
-  .title {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
 }

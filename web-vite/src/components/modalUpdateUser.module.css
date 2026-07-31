@@ -1,78 +1,80 @@
 .modalOverlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(27, 11, 46, 0.55);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 999;
   backdrop-filter: blur(4px);
+  padding: 1rem;
 }
 
 .modalContainer {
-  background: #e6e6e6;
+  background: var(--purple-50);
   width: 100%;
   max-width: 400px;
-  /* máximo 400px */
-  padding: 1.5rem;
-  border-radius: 12px;
+  padding: 1.75rem;
+  border-radius: var(--radius-xl);
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-lg);
   animation: fadeIn 0.3s ease-in-out;
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
 }
 
 .modalContainerDivs {
   width: 100%;
   height: 100%;
   position: relative;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 1.5rem 0px;
+  padding: 0.5rem 0;
 }
 
 .closeButton {
   position: absolute;
-  top: 10px;
-  right: 15px;
-  background: none;
+  top: -6px;
+  right: -6px;
+  background: var(--surface);
   border: none;
-  font-size: 20px;
+  border-radius: var(--radius-pill);
+  width: 30px;
+  height: 30px;
+  font-size: 16px;
+  color: var(--purple-700);
   cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: background var(--transition);
+}
+
+.closeButton:hover {
+  background: var(--purple-100);
 }
 
 .headerIcon img {
-  width: 70px;
-  height: 70px;
+  width: 76px;
+  height: 76px;
   margin-bottom: 20px;
-  border-radius: 999px;
-  border: 1px solid black;
+  border-radius: var(--radius-pill);
+  border: 3px solid var(--surface);
+  box-shadow: var(--shadow-sm);
+  object-fit: cover;
 }
 
 .form {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 15px;
-
+  gap: 14px;
 }
 
 .inputGroup {
@@ -84,12 +86,17 @@
 .inputGroup input {
   width: 100%;
   padding: 12px 40px 12px 14px;
-  border: none;
-  border-radius: 8px;
-  background: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1.5px solid transparent;
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
   font-size: 14px;
   outline: none;
+  transition: border-color var(--transition);
+}
+
+.inputGroup input:focus {
+  border-color: var(--purple-400);
 }
 
 .inputGroup img {
@@ -97,57 +104,63 @@
   right: 12px;
   width: 20px;
   height: 20px;
-  fill: black;
-}
-
-img.toBlack {
   filter: brightness(0) saturate(100%);
+  opacity: 0.5;
 }
 
 img.toBlackEye {
-  filter: brightness(0) saturate(100%);
   cursor: pointer;
+  opacity: 0.6;
+  transition: opacity var(--transition);
+}
+
+img.toBlackEye:hover {
+  opacity: 1;
 }
 
 .submitButton {
-  background: #487C08;
+  background: var(--purple-600);
   color: #fff;
-  font-weight: bold;
+  font-weight: 700;
   text-transform: uppercase;
+  letter-spacing: 0.03em;
   border: none;
   padding: 14px;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   cursor: pointer;
-  transition: all  0.3s ease-in-out;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition), box-shadow var(--transition);
 }
 
 .submitButton:hover {
-  background: #2f5724;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
-.logOutButton{
+.logOutButton {
   width: 100%;
   margin-top: 1rem;
-  background: #b50808;
+  background: var(--danger);
   color: #fff;
-  font-weight: bold;
+  font-weight: 700;
   text-transform: uppercase;
+  letter-spacing: 0.03em;
   border: none;
   padding: 14px;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   cursor: pointer;
-  transition: all 0.3s ease-in-out; 
+  transition: transform var(--transition), box-shadow var(--transition);
 }
 
 .logOutButton:hover {
-  background: #720101;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
-
 
 .message {
   font-size: 14px;
   text-align: center;
-  color: red;
+  color: var(--danger);
 }
 
 /* Responsivo */

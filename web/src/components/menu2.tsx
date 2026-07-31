@@ -1,6 +1,6 @@
 import style from "./menu2.module.css"
 import Image from "next/image";
-import logoNav from "../assets/images/logo.png";
+import logoNav from "../assets/images/Logo.png";
 import voltarNav from "../assets/images/Voltar.png";
 
 

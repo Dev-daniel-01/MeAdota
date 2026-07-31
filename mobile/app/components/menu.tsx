@@ -1,18 +1,23 @@
+import { Ionicons } from '@expo/vector-icons';
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet, Pressable } from 'react-native';
 import { router } from 'expo-router';
+import { useAuth } from '../context/AuthContext';
 
 export const Menu = () => {
   const [open, setOpen] = useState(false);
+  const { user } = useAuth();
 
-  const gotoApp = () => router.push('/');
-  const gotoExplore = () => router.push('/explore');
+  const go = (path: Parameters<typeof router.push>[0]) => {
+    setOpen(false);
+    router.push(path);
+  };
 
   return (
     <>
       {/* Overlay escuro quando menu aberto */}
       {open && (
-        <Pressable 
+        <Pressable
           style={styles.overlay}
           onPress={() => setOpen(false)}
         />
@@ -37,6 +42,8 @@ export const Menu = () => {
           />
         )}
 
+        {!open && <View style={{ width: 26 }} />}
+
         {open && (
           <>
             <Image
@@ -46,7 +53,7 @@ export const Menu = () => {
 
             <View style={styles.separator} />
 
-            <TouchableOpacity onPress={gotoApp} style={styles.item}>
+            <TouchableOpacity onPress={() => go('/')} style={styles.item}>
               <Image
                 source={require('@/assets/images/botao-home.png')}
                 style={styles.icon}
@@ -54,7 +61,7 @@ export const Menu = () => {
               <Text style={styles.label}>Home</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={gotoExplore} style={styles.item}>
+            <TouchableOpacity onPress={() => go('/explore')} style={styles.item}>
               <Image
                 source={require('@/assets/images/animais-de-estimacao.png')}
                 style={styles.icon}
@@ -62,7 +69,26 @@ export const Menu = () => {
               <Text style={styles.label}>Animais</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => setOpen(false)} style={styles.item}>
+            {user ? (
+              <>
+                <TouchableOpacity onPress={() => go('/my-pets')} style={styles.item}>
+                  <Ionicons name="paw-outline" size={22} color="#55187A" style={styles.iconVector} />
+                  <Text style={styles.label}>Meus Pets</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => go('/profile')} style={styles.item}>
+                  <Ionicons name="person-outline" size={22} color="#55187A" style={styles.iconVector} />
+                  <Text style={styles.label}>Perfil</Text>
+                </TouchableOpacity>
+              </>
+            ) : (
+              <TouchableOpacity onPress={() => go('/login')} style={styles.item}>
+                <Ionicons name="log-in-outline" size={22} color="#55187A" style={styles.iconVector} />
+                <Text style={styles.label}>Entrar</Text>
+              </TouchableOpacity>
+            )}
+
+            <TouchableOpacity onPress={() => setOpen(false)} style={[styles.item, { borderBottomWidth: 0 }]}>
               <Image
                 source={require('@/assets/images/botao-excluir.png')}
                 style={styles.icon}
@@ -83,12 +109,14 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(27, 11, 46, 0.5)',
     zIndex: 9,
   },
 
   topBar: {
-    backgroundColor: '#6C087C',
+    backgroundColor: '#FFFFFF',
+    borderBottomWidth: 1,
+    borderBottomColor: '#DDD2E6',
     width: '100%',
     height: 60,
     paddingHorizontal: 16,
@@ -102,7 +130,7 @@ const styles = StyleSheet.create({
   },
 
   sidebar: {
-    backgroundColor: '#6C087C',
+    backgroundColor: '#FFFFFF',
     width: 230,
     height: '100%',
     paddingVertical: 40,
@@ -111,35 +139,45 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     borderBottomRightRadius: 20,
     top: 0,
-    zIndex: 11, 
-    position: 'absolute'
+    zIndex: 11,
+    position: 'absolute',
+    shadowColor: '#000',
+    shadowOffset: { width: 4, height: 0 },
+    shadowOpacity: 0.15,
+    shadowRadius: 12,
+    elevation: 12,
   },
 
   icon: {
-    width: 30,
-    height: 30,
-    marginRight: 10,
-    tintColor: '#fff',
+    width: 26,
+    height: 26,
+    marginRight: 12,
+    tintColor: '#55187A',
+  },
+
+  iconVector: {
+    marginRight: 12,
+    width: 26,
   },
 
   logoClosed: {
-    width: 55,
-    height: 40,
-    tintColor: '#fff',
+    width: 48,
+    height: 36,
+    tintColor: '#55187A',
   },
 
   logoOpen: {
-    width: 80,
-    height: 80,
+    width: 70,
+    height: 70,
     alignSelf: 'center',
     marginBottom: 20,
-    tintColor: '#fff',
+    tintColor: '#55187A',
   },
 
   separator: {
     width: '100%',
     height: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#DDD2E6',
     marginBottom: 20,
   },
 
@@ -148,13 +186,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 12,
     borderBottomWidth: 1,
-    borderBottomColor: '#fff',
+    borderBottomColor: '#EDE6F3',
     paddingBottom: 12,
     width: '100%',
   },
 
   label: {
-    color: '#fff',
+    color: '#221A2E',
     fontSize: 16,
+    fontWeight: '500',
   },
 });

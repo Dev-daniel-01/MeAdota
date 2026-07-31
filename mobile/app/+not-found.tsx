@@ -54,25 +54,25 @@ const styles = StyleSheet.create({
   errorText: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#000',
+    color: '#221A2E',
     marginBottom: -8,
   },
   codeText: {
     fontSize: 36,
     fontWeight: 'bold',
-    color: '#000',
+    color: '#221A2E',
     marginBottom: 10,
   },
   subText: {
     fontSize: 16,
-    color: '#000',
+    color: '#564D61',
     marginBottom: 30,
   },
   button: {
-    backgroundColor: '#660066', // roxo
+    backgroundColor: '#6D28D9',
     paddingVertical: 12,
     paddingHorizontal: 40,
-    borderRadius: 25,
+    borderRadius: 999,
   },
   buttonText: {
     color: '#fff',

@@ -1,4 +1,4 @@
-import style from "./Adocao.module.css";
+import style from "./adocao.module.css";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 

@@ -2,7 +2,7 @@ import { useNavigate } from "react-router";
 
 import styles from "./menu.module.css";
 import logoNav from "../assets/images/logo.png";
-import pataNav from "../assets/images/Pata.png";
+import pataNav from "../assets/images/pata.png";
 
 export const Menu = () => {
     const navigate = useNavigate();

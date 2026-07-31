@@ -1,7 +1,8 @@
 .navBar {
   width: 100vw;
-  height: 70px;
-  background-color: #6c087c; /* roxo */
+  height: 72px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
   position: fixed;
   top: 0;
   left: 0;
@@ -24,12 +25,13 @@
   align-items: center;
   justify-content: center;
   opacity: 0.9;
-  transition: 0.2s ease;
+  transition: opacity var(--transition), transform var(--transition);
   cursor: pointer;
 }
 
 .navLink:hover {
   opacity: 1;
+  transform: translateY(-1px);
 }
 
 .navCenter {
@@ -43,60 +45,89 @@
 .searchBox {
   display: flex;
   align-items: center;
-  border: 3px solid #fff;
-  border-radius: 16px;
-  height: 3rem;  
-  width: 35vw;
-  color: white; 
+  background: var(--surface-alt);
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-pill);
+  height: 3rem;
+  width: 38vw;
+  color: var(--ink);
+  transition: border-color var(--transition), background var(--transition);
+}
+
+.searchBox:focus-within {
+  border-color: var(--purple-400);
+  background: var(--surface);
+}
+
+.logoNav {
+  filter: brightness(0) saturate(100%);
+  opacity: 0.85;
 }
 
 .searchIcon {
-  width: 1.7rem;
+  width: 1.3rem;
   height: auto;
-  margin-right: 12px;
-  margin-left: 8px;
+  margin-right: 10px;
+  margin-left: 16px;
+  filter: brightness(0) saturate(100%);
+  opacity: 0.45;
 }
 
 .searchInput {
   background: transparent;
   border: none;
   outline: none;
-  color: white;
+  color: var(--ink);
   font-size: 1rem;
   width: 220px;
 }
 
 .searchInput::placeholder {
-  color: #ddd;
+  color: var(--muted-light);
+}
+
+.profileNav {
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  background: var(--purple-100);
+  padding: 6px;
+  filter: brightness(0) saturate(100%) opacity(0.7);
+  transition: transform var(--transition);
+}
+
+.profileNav:hover {
+  transform: scale(1.08);
 }
 
 @media (max-width: 768px) {
   .navBar {
     padding: 0 0.5rem;
   }
-  .searchBox{
-    width: 100% 
+
+  .searchBox {
+    width: 100%;
   }
+
   .searchInput::placeholder {
-    
     font-size: 13px;
   }
-  
 }
 
-/* Responsivo */
 @media (max-width: 520px) {
   .navBar {
     padding: 0 0.5rem;
   }
+
   .searchInput {
     width: 150px;
   }
-  .logoNav{
+
+  .logoNav {
     height: 50px;
     width: auto;
   }
-  .profileNav{
+
+  .profileNav {
     height: 30px;
     width: auto;
   }
@@ -106,9 +137,11 @@
   .navBar {
     padding: 0 0.2rem;
   }
+
   .searchInput {
     width: 120px;
   }
+
   .searchInput::placeholder {
     font-size: 11px;
   }

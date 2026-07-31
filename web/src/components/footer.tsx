@@ -1,6 +1,6 @@
 import style from "./footer.module.css"
 import Image from "next/image";
-import logoNav from "../assets/images/logo.png";
+import logoNav from "../assets/images/Logo.png";
 import instragram from "../assets/images/instagram.png"
 import whatssap from "../assets/images/whatsapp.png"
 

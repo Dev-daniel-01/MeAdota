@@ -1,4 +1,4 @@
-import style from "./InfoPets.module.css";
+import style from "./infoPets.module.css";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 

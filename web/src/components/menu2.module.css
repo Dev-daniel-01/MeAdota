@@ -1,7 +1,8 @@
 .navBar {
   width: 100vw;
-  height: 70px;
-  background-color: #6C087C;
+  height: 72px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
   position: fixed;
   top: 0;
   left: 0;
@@ -23,35 +24,44 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0.8;
+  opacity: 0.9;
+  transition: opacity var(--transition), transform var(--transition);
 }
 
 .navLink:hover {
   opacity: 1;
+  transform: translateY(-1px);
 }
 
+.logoNav {
+  filter: brightness(0) saturate(100%);
+}
+
+.voltarNav {
+  filter: brightness(0) saturate(100%);
+  opacity: 0.75;
+}
 
 .navCenter {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  color: white;
-  padding-top: 1%;
+  color: var(--purple-700);
 }
 
-.navCenter p{
-    font-size: 1.1rem;
+.navCenter p {
+  font-size: 1.1rem;
+  font-weight: 700;
 }
 
 @media (max-width: 520px) {
-.navBar {
-  padding: 0 0.5rem;
-}
+  .navBar {
+    padding: 0 0.5rem;
+  }
 }
 
 @media (max-width: 400px) {
-.navBar {
-  padding: 0 0.2rem;
+  .navBar {
+    padding: 0 0.2rem;
+  }
 }
-}
-
